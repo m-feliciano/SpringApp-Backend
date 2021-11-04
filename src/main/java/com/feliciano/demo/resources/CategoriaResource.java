@@ -1,16 +1,28 @@
 package com.feliciano.demo.resources;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.feliciano.demo.resources.domain.Categoria;
 
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaResource {
 
 	@RequestMapping(method = RequestMethod.GET)
-	private String listar() {
-		return "<h1>REST ok...</h1>";
+	private List<Categoria> listar() {
+		Categoria cat1 = new Categoria(1, "Informática");
+		Categoria cat2 = new Categoria(2, "Escritório");
+		
+		List<Categoria> categoria = new ArrayList<>();
+		categoria.add(cat1);
+		categoria.add(cat2);
+		
+		return categoria;
 	}
 
 }
