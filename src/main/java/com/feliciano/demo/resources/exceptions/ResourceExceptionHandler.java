@@ -1,4 +1,4 @@
-package com.feliciano.demo.resources.exception;
+package com.feliciano.demo.resources.exceptions;
 
 import javax.servlet.http.HttpServletRequest;
 
