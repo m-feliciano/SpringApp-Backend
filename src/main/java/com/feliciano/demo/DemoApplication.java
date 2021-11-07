@@ -13,6 +13,7 @@ import com.feliciano.demo.repositories.CidadeRepository;
 import com.feliciano.demo.repositories.ClienteRepository;
 import com.feliciano.demo.repositories.EnderecoRepository;
 import com.feliciano.demo.repositories.EstadoRepository;
+import com.feliciano.demo.repositories.ItemPedidoRepository;
 import com.feliciano.demo.repositories.PagamentoRepository;
 import com.feliciano.demo.repositories.PedidoRepository;
 import com.feliciano.demo.repositories.ProdutoRepository;
@@ -22,6 +23,7 @@ import com.feliciano.demo.resources.domain.Cliente;
 import com.feliciano.demo.resources.domain.Endereco;
 import com.feliciano.demo.resources.domain.Estado;
 import com.feliciano.demo.resources.domain.EstadoPagamento;
+import com.feliciano.demo.resources.domain.ItemPedido;
 import com.feliciano.demo.resources.domain.Pagamento;
 import com.feliciano.demo.resources.domain.PagamentoComBoleto;
 import com.feliciano.demo.resources.domain.PagamentoComCartao;
@@ -48,6 +50,8 @@ public class DemoApplication implements CommandLineRunner {
 	private PedidoRepository pedidoRepository;
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
@@ -58,19 +62,19 @@ public class DemoApplication implements CommandLineRunner {
 		Categoria cat1 = new Categoria(null, "Informatica");
 		Categoria cat2 = new Categoria(null, "Escritorio");
 
-		Produto p1 = new Produto(null, "Computador", 2999.0);
-		Produto p2 = new Produto(null, "Impressora", 599.0);
-		Produto p3 = new Produto(null, "Teclado", 245.0);
+		Produto prod1 = new Produto(null, "Computador", 2999.0);
+		Produto prod2 = new Produto(null, "Impressora", 599.0);
+		Produto prod3 = new Produto(null, "Teclado", 245.0);
 
-		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
-		cat2.getProdutos().addAll(Arrays.asList(p2));
+		cat1.getProdutos().addAll(Arrays.asList(prod1, prod2, prod3));
+		cat2.getProdutos().addAll(Arrays.asList(prod2));
 
-		p1.getCategorias().add(cat1);
-		p2.getCategorias().addAll(Arrays.asList(cat1, cat2));
-		p3.getCategorias().add(cat1);
+		prod1.getCategorias().add(cat1);
+		prod2.getCategorias().addAll(Arrays.asList(cat1, cat2));
+		prod3.getCategorias().add(cat1);
 
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2));
-		produtoRepository.saveAll(Arrays.asList(p1, p2, p3));
+		produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3));
 
 		Estado est1 = new Estado(null, "São Paulo");
 		Estado est2 = new Estado(null, "Minas Gerais");
@@ -85,13 +89,14 @@ public class DemoApplication implements CommandLineRunner {
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(cid1, cid2, cid3));
 
-		Cliente cli1 = new Cliente(null, "Maria Maria", "maria@maria.com", "00000000", TipoCliente.PESSOAFISICA);
-
+		Cliente cli1 = new Cliente(null, "Maria Maria", "maria@maria.com", 
+				"00000000", TipoCliente.PESSOAFISICA);
 		cli1.getTelefones().addAll(Arrays.asList("202011210", "959510250"));
 
-		Endereco end1 = new Endereco(null, "Rua da Copa", "20", "10 andar", "Praia do Sol", "00499100", cid3, cli1);
-		Endereco end2 = new Endereco(null, "Rua sono", "564", "casa", "Cafe palace", "32910010", cid2, cli1);
-
+		Endereco end1 = new Endereco(null, "Rua da Copa", "20", "10 andar", 
+				"Praia do Sol", "00499100", cid3, cli1);
+		Endereco end2 = new Endereco(null, "Rua sono", "564", "casa", 
+				"Cafe palace", "32910010", cid2, cli1);
 		cli1.getEnderecos().addAll(Arrays.asList(end1, end2));
 
 		clienteRepository.saveAll(Arrays.asList(cli1));
@@ -102,16 +107,31 @@ public class DemoApplication implements CommandLineRunner {
 		Pedido ped2 = new Pedido(null, sdf.parse("01/10/2020 16:30"), cli1, end2);
 
 		Pagamento pag1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 4);
-
 		ped1.setPagamento(pag1);
-		Pagamento pag2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("10/11/2021 00:00"),
-				null);
+		
+		Pagamento pag2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, 
+				sdf.parse("10/11/2021 00:00"),null);
 		ped2.setPagamento(pag2);
 
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
 
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pag1, pag2));
+
+		ItemPedido ip1 = new ItemPedido(ped1, prod1, 0.00, 1, 2999.0);
+		ItemPedido ip2 = new ItemPedido(ped1, prod3, 0.00, 1, 599.0);
+		ItemPedido ip3 = new ItemPedido(ped2, prod2, 29.90, 1, 245.0);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		prod1.getItens().addAll(Arrays.asList(ip1));
+		prod2.getItens().addAll(Arrays.asList(ip3));
+		prod3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2,ip3));
+		
 	}
+	
 
 }
