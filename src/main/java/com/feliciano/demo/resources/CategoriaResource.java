@@ -3,6 +3,7 @@ package com.feliciano.demo.resources;
 import java.net.URI;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.feliciano.demo.resources.domain.Categoria;
 import com.feliciano.demo.services.CategoriaService;
+import com.feliciano.demo.services.exceptions.DataIntegrityException;
 
 @RestController
 @RequestMapping(value = "/categorias")
@@ -28,20 +30,29 @@ public class CategoriaResource {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Categoria obj) { //@RequestBody converts JSON to object body
+	public ResponseEntity<Void> insert(@RequestBody Categoria obj) { // @RequestBody converts JSON to object body
 		obj = service.insert(obj);
 		ServletUriComponentsBuilder.fromCurrentRequest();
 		URI uri = ServletUriComponentsBuilder.fromPath("/{id}")
 				.buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody Categoria obj,
-			@PathVariable Integer id) {
+	public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id) {
 		obj.setId(id);
 		service.update(obj);
-				return ResponseEntity.noContent().build();
-	
+		return ResponseEntity.noContent().build();
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {
+		try {
+			service.delete(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é posisvel excluir uma categoria que possui produtos!");
+		}
+		return ResponseEntity.noContent().build();
 	}
 
 }

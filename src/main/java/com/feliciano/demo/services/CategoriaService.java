@@ -22,12 +22,17 @@ public class CategoriaService {
 	}
 
 	public Categoria insert(Categoria obj) {
-		obj.setId(null); // it doesn't allow the passing of id to database  
+		obj.setId(null); // it doesn't allow the passing of id to database
 		return repo.save(obj);
 	}
 
 	public Categoria update(Categoria obj) {
 		find(obj.getId());
 		return repo.save(obj);
+	}
+
+	public void delete(Integer id) {
+		find(id);
+		repo.deleteById(id);
 	}
 }
