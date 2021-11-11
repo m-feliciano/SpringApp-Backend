@@ -26,7 +26,7 @@ public abstract class Pagamento implements Serializable {
 	private Integer id;
 	private Integer estado;
 
-	@JsonIgnore //deny serialization
+	@JsonIgnore // deny serialization
 	@OneToOne
 	@JoinColumn(name = "pedido_id")
 	@MapsId
@@ -48,7 +48,7 @@ public abstract class Pagamento implements Serializable {
 	}
 
 	public void setEstado(EstadoPagamento estado) {
-		this.estado = estado.getCod();
+		this.estado = (estado == null) ? null : estado.getCod();
 	}
 
 	public Pedido getPedido() {
