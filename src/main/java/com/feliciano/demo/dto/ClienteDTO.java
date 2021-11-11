@@ -7,17 +7,21 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.feliciano.demo.resources.domain.Cliente;
-import javax.validation.constraints.Email; 
+import javax.validation.constraints.Email;
 
 public class ClienteDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
 	private Integer id;
 
 	@NotEmpty(message = "Preenchiento obrigatório")
-	@Length(min = 5, max = 14, 
-		message = "A categoria '${validatedValue}' deve ter entre {min} e {max} characteres")
+	@Length(min = 5, max = 100, message = "O cliente '${validatedValue}' deve ter entre {min} e {max} characteres")
 	private String nome;
+
+	@NotEmpty(message = "Preenchiento obrigatório")
+	@Email(message = "E-mail inválido")
+	private String email;
 
 	public ClienteDTO() {
 		super();
@@ -27,12 +31,14 @@ public class ClienteDTO implements Serializable {
 		super();
 		id = obj.getId();
 		nome = obj.getNome();
+		email = obj.getEmail();
 	}
-
-	public ClienteDTO(Integer id, String nome) {
+	
+	public ClienteDTO(Integer id, String nome, String email) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.email = email;
 	}
 
 	/**
@@ -63,11 +69,12 @@ public class ClienteDTO implements Serializable {
 		this.nome = nome;
 	}
 
-	/**
-	 * @return the serialversionuid
-	 */
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }
