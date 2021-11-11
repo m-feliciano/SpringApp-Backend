@@ -7,6 +7,6 @@ import com.feliciano.demo.resources.domain.Cidade;
 
 @Repository
 public interface CidadeRepository extends JpaRepository<Cidade, Integer> {
-	
-	
+
+
 }

@@ -15,7 +15,7 @@ public class ItemPedidoPK implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "pedido_id")
 	private Pedido pedido;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "produto_id")
 	private Produto produto;
@@ -64,14 +64,12 @@ public class ItemPedidoPK implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		ItemPedidoPK other = (ItemPedidoPK) obj;
 		return Objects.equals(pedido, other.pedido) && Objects.equals(produto, other.produto);
 	}
-	
-	
+
+
 
 }

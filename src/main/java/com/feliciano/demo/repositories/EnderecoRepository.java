@@ -7,6 +7,6 @@ import com.feliciano.demo.resources.domain.Endereco;
 
 @Repository
 public interface EnderecoRepository extends JpaRepository<Endereco, Integer> {
-	
-	
+
+
 }

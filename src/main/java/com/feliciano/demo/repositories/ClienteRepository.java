@@ -7,6 +7,6 @@ import com.feliciano.demo.resources.domain.Cliente;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
-	
-	
+
+
 }

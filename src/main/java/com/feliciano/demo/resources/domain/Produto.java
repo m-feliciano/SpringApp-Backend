@@ -31,8 +31,8 @@ public class Produto implements Serializable {
 
 	@JsonIgnore //deny serialization
 	@ManyToMany
-	@JoinTable(name = "PRODUTO_CATEGORIA", 
-		joinColumns = @JoinColumn(name = "produto_id"), 
+	@JoinTable(name = "PRODUTO_CATEGORIA",
+		joinColumns = @JoinColumn(name = "produto_id"),
 		inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 	private List<Categoria> categorias = new ArrayList<>();
 
@@ -130,9 +130,7 @@ public class Produto implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if ((obj == null) || (getClass() != obj.getClass()))
 			return false;
 		Produto other = (Produto) obj;
 		return Objects.equals(id, other.id);

@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import com.feliciano.demo.dto.CategoriaDTO;
 import com.feliciano.demo.repositories.CategoriaRepository;
 import com.feliciano.demo.resources.domain.Categoria;
 import com.feliciano.demo.services.exceptions.ObjectNotFoundException;
@@ -43,11 +44,16 @@ public class CategoriaService {
 	public List<Categoria> findAll() {
 		return repo.findAll();
 	}
-	
+
 	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
-		
+
 	}
-	
+
+	public Categoria fromDTO(CategoriaDTO objDto) {
+		return new Categoria(objDto.getId(), objDto.getNome());
+
+	}
+
 }

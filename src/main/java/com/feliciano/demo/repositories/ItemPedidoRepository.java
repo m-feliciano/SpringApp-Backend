@@ -7,5 +7,5 @@ import com.feliciano.demo.resources.domain.ItemPedido;
 
 @Repository
 public interface ItemPedidoRepository extends JpaRepository<ItemPedido, Integer> {
-		
+
 }

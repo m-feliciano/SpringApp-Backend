@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.feliciano.demo.dto.CategoriaDTO;
 import com.feliciano.demo.resources.domain.Categoria;
@@ -35,15 +38,17 @@ public class CategoriaResource {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Categoria obj) { // @RequestBody converts JSON to object body
+	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto) { // @RequestBody converts JSON to object body
+		Categoria obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
 		ServletUriComponentsBuilder.fromCurrentRequest();
-		URI uri = ServletUriComponentsBuilder.fromPath("/{id}").buildAndExpand(obj.getId()).toUri();
+		URI uri = UriComponentsBuilder.fromPath("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id) {
+	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id) {
+		Categoria obj = service.fromDTO(objDto);
 		obj.setId(id);
 		service.update(obj);
 		return ResponseEntity.noContent().build();
