@@ -2,20 +2,35 @@ package com.feliciano.demo.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
+import com.feliciano.demo.services.validation.ClienteInsert;
+
+@ClienteInsert
 public class ClienteNewDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	@NotEmpty(message = "Preenchiento obrigatório")
+	@Length(min = 5, max = 100, message = "O cliente '${validatedValue}' deve ter entre {min} e {max} characteres")
 	private String nome;
+	@NotEmpty(message = "Preenchiento obrigatório")
+	@Email(message = "E-mail inválido")
 	private String email;
-	private String cpf;
+	@NotEmpty(message = "Preenchiento obrigatório")
+	private String cpfOrCnpj;
 	private Integer tipo;
-
+	@NotEmpty(message = "Preenchiento obrigatório")
 	private String logradouro;
+	@NotEmpty(message = "Preenchiento obrigatório")
 	private String numero;
 	private String complemento;
+	@NotEmpty(message = "Preenchiento obrigatório")
 	private String bairro;
 	private String cep;
-
+	@NotEmpty(message = "Preenchiento obrigatório")
 	private String telefone1;
 	private String telefone2;
 
@@ -40,12 +55,12 @@ public class ClienteNewDTO implements Serializable {
 		this.email = email;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public String getCpfOrCnpj() {
+		return cpfOrCnpj;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void cpfOrCnpj(String cpfOrCnpj) {
+		this.cpfOrCnpj = cpfOrCnpj;
 	}
 
 	public Integer getTipo() {

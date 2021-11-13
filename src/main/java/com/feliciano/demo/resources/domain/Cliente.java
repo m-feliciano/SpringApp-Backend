@@ -16,8 +16,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.Cascade;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.feliciano.demo.resources.domain.enums.TipoCliente;
 
@@ -31,7 +29,7 @@ public class Cliente implements Serializable {
 	private Integer id;
 	private String nome;
 	private String email;
-	private String cpf;
+	private String cpfOrCnpj;
 	private Integer tipo;
 
 	@OneToMany(mappedBy = "cliente", cascade=CascadeType.ALL) //@cascate(ALL) delete in cascate(all) enderecos from cliente
@@ -49,12 +47,12 @@ public class Cliente implements Serializable {
 		super();
 	}
 
-	public Cliente(Integer id, String nome, String email, String cpf, TipoCliente tipo) {
+	public Cliente(Integer id, String nome, String email, String cpfOrCnpj, TipoCliente tipo) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
-		this.cpf = cpf;
+		this.cpfOrCnpj = cpfOrCnpj;
 		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
 
@@ -101,17 +99,17 @@ public class Cliente implements Serializable {
 	}
 
 	/**
-	 * @return the cpf
+	 * @return the cpfOrCnpj
 	 */
 	public String getCpf() {
-		return cpf;
+		return cpfOrCnpj;
 	}
 
 	/**
-	 * @param cpf the cpf to set
+	 * @param cpfOrCnpj the cpfOrCnpj to set
 	 */
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setCpf(String cpfOrCnpj) {
+		this.cpfOrCnpj = cpfOrCnpj;
 	}
 
 	/**
