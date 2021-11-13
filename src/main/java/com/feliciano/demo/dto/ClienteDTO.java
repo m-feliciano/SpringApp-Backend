@@ -7,8 +7,11 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.feliciano.demo.resources.domain.Cliente;
+import com.feliciano.demo.services.validation.ClienteUpdate;
+
 import javax.validation.constraints.Email;
 
+@ClienteUpdate
 public class ClienteDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
