@@ -14,9 +14,11 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 public abstract class Pagamento implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -47,6 +49,7 @@ public abstract class Pagamento implements Serializable {
 		return EstadoPagamento.toEnum(estado);
 	}
 
+
 	public void setEstado(EstadoPagamento estado) {
 		this.estado = (estado == null) ? null : estado.getCod();
 	}
@@ -76,7 +79,9 @@ public abstract class Pagamento implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if ((obj == null) || (getClass() != obj.getClass()))
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
 			return false;
 		Pagamento other = (Pagamento) obj;
 		return Objects.equals(id, other.id);
