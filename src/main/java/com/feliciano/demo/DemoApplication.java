@@ -56,7 +56,7 @@ public class DemoApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
-
+	
 	@Override
 	public void run(String... args) throws Exception {
 		Categoria cat1 = new Categoria(null, "Informatica");
@@ -139,9 +139,9 @@ public class DemoApplication implements CommandLineRunner {
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pag1, pag2));
 
-		ItemPedido ip1 = new ItemPedido(ped1, prod1, 0.00, 1, 2999.0);
-		ItemPedido ip2 = new ItemPedido(ped1, prod3, 0.00, 1, 599.0);
-		ItemPedido ip3 = new ItemPedido(ped2, prod2, 29.90, 1, 245.0);
+		ItemPedido ip1 = new ItemPedido(ped1, prod1, 0.00, 1, prod1.getPreco());
+		ItemPedido ip2 = new ItemPedido(ped1, prod3, 0.00, 1, prod3.getPreco());
+		ItemPedido ip3 = new ItemPedido(ped2, prod2, 29.90, 1, prod2.getPreco());
 
 		ped1.getItens().addAll(Arrays.asList(ip1, ip2));
 		ped2.getItens().addAll(Arrays.asList(ip3));
