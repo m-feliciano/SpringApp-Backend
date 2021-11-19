@@ -56,9 +56,7 @@ public class Pedido implements Serializable {
 	}
 
 	public double getValorTotal() {
-		return itens.stream()
-				.map(p -> p.getSubtotal())
-				.reduce(0.0, (total, acumulador) -> total + acumulador)
+		return itens.stream().map(p -> p.getSubtotal()).reduce(0.0, (total, acumulador) -> total + acumulador)
 				.doubleValue();
 	}
 
@@ -100,8 +98,6 @@ public class Pedido implements Serializable {
 		Pedido other = (Pedido) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
 
 	public Integer getId() {
 		return id;

@@ -37,17 +37,17 @@ public class ClienteResource {
 		Cliente obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	
-	
+
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) { // @RequestBody converts JSON to object body
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) { // @RequestBody converts JSON to
+																					// object body
 		Cliente obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
 		ServletUriComponentsBuilder.fromCurrentRequest();
 		URI uri = UriComponentsBuilder.fromPath("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDto, @PathVariable Integer id) {
 		Cliente obj = service.fromDTO(objDto);
@@ -74,8 +74,7 @@ public class ClienteResource {
 	}
 
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
-	private ResponseEntity<Page<ClienteDTO>> findPage(
-			@RequestParam(value = "page", defaultValue = "0") Integer page,
+	private ResponseEntity<Page<ClienteDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
 			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {

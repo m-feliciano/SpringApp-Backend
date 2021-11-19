@@ -8,5 +8,4 @@ import com.feliciano.demo.resources.domain.Estado;
 @Repository
 public interface EstadoRepository extends JpaRepository<Estado, Integer> {
 
-
 }

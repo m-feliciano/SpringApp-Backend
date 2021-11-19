@@ -29,14 +29,12 @@ public class Produto implements Serializable {
 	private String nome;
 	private Double preco;
 
-	@JsonIgnore //deny serialization
+	@JsonIgnore // deny serialization
 	@ManyToMany
-	@JoinTable(name = "PRODUTO_CATEGORIA",
-		joinColumns = @JoinColumn(name = "produto_id"),
-		inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+	@JoinTable(name = "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 	private List<Categoria> categorias = new ArrayList<>();
 
-	@JsonIgnore //deny serialization
+	@JsonIgnore // deny serialization
 	@OneToMany(mappedBy = "id.produto")
 	private Set<ItemPedido> itens = new HashSet<>();
 
@@ -50,7 +48,7 @@ public class Produto implements Serializable {
 		this.preco = preco;
 	}
 
-	@JsonIgnore  //deny serialization
+	@JsonIgnore // deny serialization
 	public List<Pedido> getPedidos() {
 		List<Pedido> lista = new ArrayList<>();
 		lista.forEach(p -> lista.add(p));

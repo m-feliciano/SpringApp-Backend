@@ -28,10 +28,9 @@ public class ProdutoResource {
 		Produto obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	
-	@RequestMapping( method = RequestMethod.GET)
-	private ResponseEntity<Page<ProdutoDTO>> findPage(
-			@RequestParam(value = "nome", defaultValue = "0") String nome,
+
+	@RequestMapping(method = RequestMethod.GET)
+	private ResponseEntity<Page<ProdutoDTO>> findPage(@RequestParam(value = "nome", defaultValue = "0") String nome,
 			@RequestParam(value = "categorias", defaultValue = "0") String categorias,
 			@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,

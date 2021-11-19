@@ -16,31 +16,28 @@ import com.feliciano.demo.services.exceptions.ObjectNotFoundException;
 public class ResourceExceptionHandler {
 
 	@ExceptionHandler(ObjectNotFoundException.class)
-	public ResponseEntity<StandardError> objectNotfound(
-			ObjectNotFoundException e, HttpServletRequest request) {
-		StandardError error = new StandardError(
-				HttpStatus.NOT_FOUND.value(), e.getMessage(), System.currentTimeMillis());
+	public ResponseEntity<StandardError> objectNotfound(ObjectNotFoundException e, HttpServletRequest request) {
+		StandardError error = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(),
+				System.currentTimeMillis());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
 
 	}
 
 	@ExceptionHandler(DataIntegrityException.class)
-	public ResponseEntity<StandardError> dataIntegrity(
-			DataIntegrityException e, HttpServletRequest request) {
+	public ResponseEntity<StandardError> dataIntegrity(DataIntegrityException e, HttpServletRequest request) {
 		StandardError error = new StandardError(HttpStatus.BAD_REQUEST.value(), e.getMessage(),
 				System.currentTimeMillis());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
 
 	}
-	
+
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<StandardError> dataIntegrity(
-			MethodArgumentNotValidException e, HttpServletRequest request) {
-		ValidationError error = new ValidationError(
-				HttpStatus.BAD_REQUEST.value(), "Erro de validação", System.currentTimeMillis());
-		
-		for(FieldError f : e.getBindingResult().getFieldErrors()) {
-			error.addError(f.getField(),f.getDefaultMessage());
+	public ResponseEntity<StandardError> dataIntegrity(MethodArgumentNotValidException e, HttpServletRequest request) {
+		ValidationError error = new ValidationError(HttpStatus.BAD_REQUEST.value(), "Erro de validação",
+				System.currentTimeMillis());
+
+		for (FieldError f : e.getBindingResult().getFieldErrors()) {
+			error.addError(f.getField(), f.getDefaultMessage());
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
 

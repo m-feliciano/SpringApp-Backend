@@ -32,7 +32,7 @@ import com.feliciano.demo.resources.domain.enums.TipoCliente;
 
 @Service
 public class DBService {
-	
+
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 	@Autowired
@@ -51,10 +51,9 @@ public class DBService {
 	private PagamentoRepository pagamentoRepository;
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
-	
-	
+
 	public void instanciateTestDatabase() throws ParseException {
-		
+
 		Categoria cat1 = new Categoria(null, "Informatica");
 		Categoria cat2 = new Categoria(null, "Escritorio");
 		Categoria cat3 = new Categoria(null, "Casa, mesa e banho");
@@ -80,21 +79,19 @@ public class DBService {
 		cat5.getProdutos().addAll(Arrays.asList(prod3, prod5));
 		cat6.getProdutos().addAll(Arrays.asList(prod6));
 		cat7.getProdutos().addAll(Arrays.asList(prod7));
-		
-		prod1.getCategorias().addAll(Arrays.asList(cat1,cat5));
+
+		prod1.getCategorias().addAll(Arrays.asList(cat1, cat5));
 		prod2.getCategorias().addAll(Arrays.asList(cat1, cat2));
-		prod3.getCategorias().addAll(Arrays.asList(cat1,cat5));
+		prod3.getCategorias().addAll(Arrays.asList(cat1, cat5));
 		prod4.getCategorias().addAll(Arrays.asList(cat1, cat2));
 		prod5.getCategorias().addAll(Arrays.asList(cat1, cat2, cat5));
-		prod6.getCategorias().addAll(Arrays.asList(cat6,cat7));
-		prod7.getCategorias().addAll(Arrays.asList(cat6,cat7));
+		prod6.getCategorias().addAll(Arrays.asList(cat6, cat7));
+		prod7.getCategorias().addAll(Arrays.asList(cat6, cat7));
 		prod8.getCategorias().addAll(Arrays.asList(cat3));
 		prod9.getCategorias().addAll(Arrays.asList(cat4));
-				
-		categoriaRepository.saveAll(Arrays.asList(
-				cat1, cat2,cat3, cat4, cat5, cat6, cat7));
-		produtoRepository.saveAll(Arrays.asList(
-				prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8, prod9));
+
+		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
+		produtoRepository.saveAll(Arrays.asList(prod1, prod2, prod3, prod4, prod5, prod6, prod7, prod8, prod9));
 
 		Estado est1 = new Estado(null, "São Paulo");
 		Estado est2 = new Estado(null, "Minas Gerais");

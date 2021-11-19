@@ -21,6 +21,7 @@ public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate
 	private ClienteRepository repo;
 	@Autowired
 	private HttpServletRequest req;
+
 	@Override
 	public void initialize(ClienteUpdate ann) {
 	}
@@ -28,21 +29,20 @@ public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate
 	@Override
 	public boolean isValid(ClienteDTO objDto, ConstraintValidatorContext context) {
 
-		Object urlId = req.getAttribute(
-				HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
-		
+		Object urlId = req.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
+
 		List<FieldMessage> list = new ArrayList<>();
 
 		Cliente aux = repo.findByEmail(objDto.getEmail());
-		
-		if(aux != null && !aux.getId().equals(urlId)) {
+
+		if (aux != null && !aux.getId().equals(urlId)) {
 			list.add(new FieldMessage("email", "E-mail ja existente!"));
 		}
 
 		for (FieldMessage e : list) {
 			context.disableDefaultConstraintViolation();
-			context.buildConstraintViolationWithTemplate(e.getMessage())
-			.addPropertyNode(e.getFildName()).addConstraintViolation();
+			context.buildConstraintViolationWithTemplate(e.getMessage()).addPropertyNode(e.getFildName())
+					.addConstraintViolation();
 		}
 		return list.isEmpty();
 	}

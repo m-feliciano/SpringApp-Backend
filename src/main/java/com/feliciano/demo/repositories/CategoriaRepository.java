@@ -8,5 +8,4 @@ import com.feliciano.demo.resources.domain.Categoria;
 @Repository
 public interface CategoriaRepository extends JpaRepository<Categoria, Integer> {
 
-
 }

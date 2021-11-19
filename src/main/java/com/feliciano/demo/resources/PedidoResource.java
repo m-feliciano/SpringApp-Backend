@@ -29,7 +29,7 @@ public class PedidoResource {
 		Pedido obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody Pedido obj) { // @RequestBody converts JSON to object body
 		obj = service.insert(obj);

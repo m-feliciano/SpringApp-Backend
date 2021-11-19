@@ -32,7 +32,8 @@ public class Cliente implements Serializable {
 	private String cpfOrCnpj;
 	private Integer tipo;
 
-	@OneToMany(mappedBy = "cliente", cascade=CascadeType.ALL) //@cascate(ALL) delete in cascate(all) enderecos from cliente
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL) // @cascate(ALL) delete in cascate(all) enderecos from
+																// cliente
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	@ElementCollection

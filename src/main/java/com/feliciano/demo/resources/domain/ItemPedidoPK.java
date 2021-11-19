@@ -70,6 +70,4 @@ public class ItemPedidoPK implements Serializable {
 		return Objects.equals(pedido, other.pedido) && Objects.equals(produto, other.produto);
 	}
 
-
-
 }

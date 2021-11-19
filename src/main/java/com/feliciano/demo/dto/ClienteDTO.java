@@ -2,14 +2,13 @@ package com.feliciano.demo.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
 import com.feliciano.demo.resources.domain.Cliente;
 import com.feliciano.demo.services.validation.ClienteUpdate;
-
-import javax.validation.constraints.Email;
 
 @ClienteUpdate
 public class ClienteDTO implements Serializable {
@@ -36,7 +35,7 @@ public class ClienteDTO implements Serializable {
 		nome = obj.getNome();
 		email = obj.getEmail();
 	}
-	
+
 	public ClienteDTO(Integer id, String nome, String email) {
 		super();
 		this.id = id;

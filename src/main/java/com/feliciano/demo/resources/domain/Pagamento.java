@@ -49,7 +49,6 @@ public abstract class Pagamento implements Serializable {
 		return EstadoPagamento.toEnum(estado);
 	}
 
-
 	public void setEstado(EstadoPagamento estado) {
 		this.estado = (estado == null) ? null : estado.getCod();
 	}

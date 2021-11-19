@@ -38,7 +38,8 @@ public class CategoriaResource {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto) { // @RequestBody converts JSON to object body
+	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto) { // @RequestBody converts JSON to
+																					// object body
 		Categoria obj = service.fromDTO(objDto);
 		obj = service.insert(obj);
 		ServletUriComponentsBuilder.fromCurrentRequest();
@@ -72,8 +73,7 @@ public class CategoriaResource {
 	}
 
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
-	private ResponseEntity<Page<CategoriaDTO>> findPage(
-			@RequestParam(value = "page", defaultValue = "0") Integer page,
+	private ResponseEntity<Page<CategoriaDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
 			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {
