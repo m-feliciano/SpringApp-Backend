@@ -27,6 +27,8 @@ public class PedidoService {
 	@Autowired
 	private ProdutoService prodService;
 	@Autowired
+	private ClienteService clienteService;
+	@Autowired
 	private PagamentoRepository pagamento;
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
@@ -43,6 +45,7 @@ public class PedidoService {
 		obj.setInstante(new Date());
 		obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
 		obj.getPagamento().setPedido(obj);
+		obj.setCliente(clienteService.find(obj.getCliente().getId()));
 		if (obj.getPagamento() instanceof PagamentoComBoleto) {
 			PagamentoComBoleto pagto = (PagamentoComBoleto) obj.getPagamento();
 			boletoService.preencherPagamentoComBoleto(pagto, obj.getInstante());
@@ -52,11 +55,12 @@ public class PedidoService {
 
 		for (ItemPedido p : obj.getItens()) {
 			p.setDesconto(0.0);
-			p.setPreco(prodService.find(p.getProduto().getId()).getPreco());
+			p.setProduto(prodService.find(p.getProduto().getId()));
+			p.setPreco(p.getProduto().getPreco());
 			p.setPedido(obj);
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
-
+		System.out.println(obj);
 		return obj;
 	}
 }
