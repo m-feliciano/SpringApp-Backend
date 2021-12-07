@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.feliciano.demo.resources.domain.enums.TipoCliente;
 
 @Entity
@@ -31,6 +32,9 @@ public class Cliente implements Serializable {
 	private String email;
 	private String cpfOrCnpj;
 	private Integer tipo;
+	
+	@JsonIgnore
+	private String senha;
 
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL) // @cascate(ALL) delete in cascate(all) enderecos from
 																// cliente
@@ -48,12 +52,13 @@ public class Cliente implements Serializable {
 		super();
 	}
 
-	public Cliente(Integer id, String nome, String email, String cpfOrCnpj, TipoCliente tipo) {
+	public Cliente(Integer id, String nome, String email, String cpfOrCnpj, TipoCliente tipo, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.cpfOrCnpj = cpfOrCnpj;
+		this.senha = senha;
 		this.tipo = (tipo == null) ? null : tipo.getCod();
 	}
 
@@ -69,6 +74,14 @@ public class Cliente implements Serializable {
 	 */
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	/**

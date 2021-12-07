@@ -7,6 +7,7 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.feliciano.demo.services.validation.ClienteInsert;
 
 @ClienteInsert
@@ -36,6 +37,9 @@ public class ClienteNewDTO implements Serializable {
 
 	private Integer cidadeId;
 
+	@JsonIgnore
+	private String senha;
+	
 	public ClienteNewDTO() {
 	}
 
@@ -53,6 +57,14 @@ public class ClienteNewDTO implements Serializable {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public String getCpfOrCnpj() {
