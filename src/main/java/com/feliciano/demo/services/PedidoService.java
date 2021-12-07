@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 import com.feliciano.demo.repositories.ItemPedidoRepository;
 import com.feliciano.demo.repositories.PagamentoRepository;
 import com.feliciano.demo.repositories.PedidoRepository;
-import com.feliciano.demo.resources.domain.EstadoPagamento;
 import com.feliciano.demo.resources.domain.ItemPedido;
 import com.feliciano.demo.resources.domain.PagamentoComBoleto;
 import com.feliciano.demo.resources.domain.Pedido;
+import com.feliciano.demo.resources.domain.enums.EstadoPagamento;
 import com.feliciano.demo.services.exceptions.ObjectNotFoundException;
 
 @Service

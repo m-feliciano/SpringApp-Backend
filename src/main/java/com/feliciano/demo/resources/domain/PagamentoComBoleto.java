@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.feliciano.demo.resources.domain.enums.EstadoPagamento;
 
 @Entity
 @JsonTypeName("pagamentoComBoleto")

@@ -1,13 +1,13 @@
-package com.feliciano.demo.resources.domain;
+package com.feliciano.demo.resources.domain.enums;
 
-public enum EstadoPagamento {
+public enum Perfil {
 
-	PENDENTE(1, "Pendente"), QUITADO(2, "Quitado"), CANCELADO(3, "Cancelado");
+	ADMIN(1, "ROLE_ADMIN"), CLIENTE(2, "ROLE_CLIENTE");
 
 	private int cod;
 	private String descricao;
 
-	private EstadoPagamento(int cod, String descricao) {
+	private Perfil(int cod, String descricao) {
 		this.cod = cod;
 		this.descricao = descricao;
 	}
@@ -26,13 +26,13 @@ public enum EstadoPagamento {
 		return descricao;
 	}
 
-	public static EstadoPagamento toEnum(Integer cod) {
+	public static Perfil toEnum(Integer cod) {
 		if (cod == null) {
 			return null;
 		}
-		for (EstadoPagamento ep : EstadoPagamento.values()) {
-			if (cod.equals(ep.getCod())) {
-				return ep;
+		for (Perfil p : Perfil.values()) {
+			if (cod.equals(p.getCod())) {
+				return p;
 			}
 		}
 		throw new IllegalAccessError("Id invalido" + cod);

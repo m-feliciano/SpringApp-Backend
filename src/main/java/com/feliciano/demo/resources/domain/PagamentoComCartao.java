@@ -3,6 +3,7 @@ package com.feliciano.demo.resources.domain;
 import javax.persistence.Entity;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.feliciano.demo.resources.domain.enums.EstadoPagamento;
 
 @Entity
 @JsonTypeName("pagamentoComCartao")
