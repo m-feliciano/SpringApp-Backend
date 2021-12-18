@@ -1,6 +1,7 @@
 package com.feliciano.demo.config;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +20,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.feliciano.demo.security.JWTAuthenticationFilter;
+import com.feliciano.demo.security.JWTAuthorizationFilter;
 import com.feliciano.demo.security.JWTUtil;
 
 @Configuration
@@ -51,6 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers(PUBLIC_MATCHERS).permitAll()
 			.anyRequest().authenticated();
 		http.addFilter(new JWTAuthenticationFilter(jwtUtil, authenticationManager()));
+		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 	
@@ -62,12 +65,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
-//		CorsConfiguration configuration = new CorsConfiguration();
-//		configuration.setAllowedMethods(List.of(
-//				HttpMethod.GET.name(), 
-//				HttpMethod.PUT.name(), 
-//				HttpMethod.POST.name(),
-//				HttpMethod.DELETE.name()));
+		CorsConfiguration configuration = new CorsConfiguration();
+		configuration.setAllowedMethods(List.of(
+				HttpMethod.GET.name(), 
+				HttpMethod.PUT.name(), 
+				HttpMethod.POST.name(),
+				HttpMethod.DELETE.name()));
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
 		return source;
