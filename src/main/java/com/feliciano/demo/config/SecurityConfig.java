@@ -1,8 +1,8 @@
 package com.feliciano.demo.config;
 
-import java.util.Arrays;
-import java.util.List;
-
+import com.feliciano.demo.security.JWTAuthenticationFilter;
+import com.feliciano.demo.security.JWTAuthorizationFilter;
+import com.feliciano.demo.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,9 +20,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.feliciano.demo.security.JWTAuthenticationFilter;
-import com.feliciano.demo.security.JWTAuthorizationFilter;
-import com.feliciano.demo.security.JWTUtil;
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -42,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private static final String[] PUBLIC_MATCHERS_GET = { "/produtos/**", "/categorias/**" };
 
-	private static final String[] PUBLIC_MATCHERS_POST = { "/clientes/**" };
+	private static final String[] PUBLIC_MATCHERS_POST = { "/clientes/**", "/auth/forgot/**" };
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
