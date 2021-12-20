@@ -111,20 +111,22 @@ public class DBService {
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(cid1, cid2, cid3));
 
-		Cliente cli1 = new Cliente(null, "Feliciano", "feliciano@keemail.me", "00000000", TipoCliente.PESSOAFISICA,
-				per.encode("123"));
+		Cliente cli1 = new Cliente(null, "Feliciano", "feliciano@keemail.me", "00000000",
+				TipoCliente.PESSOAFISICA, per.encode("123"));
 		cli1.getTelefones().addAll(Arrays.asList("202011210", "959510250"));
+		cli1.addPerfil(Perfil.CLIENTE);
 
-		Cliente cli2 = new Cliente(null, "Vitor", "mfeliciano@keemail.me", "00000001", TipoCliente.PESSOAFISICA,
-				per.encode("123"));
-		cli2.addPerfil(Perfil.ADMIN);
+		Cliente cli2 = new Cliente(null, "Vitor", "mfeliciano@keemail.me", "00000001",
+				TipoCliente.PESSOAFISICA, per.encode("123"));
 		cli2.getTelefones().addAll(Arrays.asList("121434390", "025073837"));
+		cli2.addPerfil(Perfil.ADMIN);
 
 		Endereco end1 = new Endereco(null, "Rua da Copa", "20", "10 andar", "Praia do Sol", "00499100", cid3, cli1);
 		Endereco end2 = new Endereco(null, "Rua sono", "564", "casa", "Cafe palace", "32910010", cid2, cli1);
 		Endereco end3 = new Endereco(null, "Rua sucesso", "99", "Condominio", "Cabine zoo", "3747430", cid2, cli2);
 
 		cli1.getEnderecos().addAll(Arrays.asList(end1, end2));
+		cli2.getEnderecos().addAll(Arrays.asList(end3));
 
 		clienteRepository.saveAll(Arrays.asList(cli1, cli2));
 		enderecoRepository.saveAll(Arrays.asList(end1, end2, end3));

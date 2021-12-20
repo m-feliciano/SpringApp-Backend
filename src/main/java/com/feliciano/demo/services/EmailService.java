@@ -1,10 +1,10 @@
 package com.feliciano.demo.services;
 
-import javax.mail.internet.MimeMessage;
-
+import com.feliciano.demo.resources.domain.Cliente;
+import com.feliciano.demo.resources.domain.Pedido;
 import org.springframework.mail.SimpleMailMessage;
 
-import com.feliciano.demo.resources.domain.Pedido;
+import javax.mail.internet.MimeMessage;
 
 public interface EmailService {
 
@@ -15,5 +15,7 @@ public interface EmailService {
 	void sendOrderConfirmationHtmlEmail(Pedido obj); 
 	
 	void sendHtmlEmail(MimeMessage msg);
+
+    void sendNewPasswordEmail(Cliente cliente, String newPass);
 
 }
