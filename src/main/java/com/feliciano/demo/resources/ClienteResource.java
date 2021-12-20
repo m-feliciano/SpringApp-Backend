@@ -34,7 +34,7 @@ public class ClienteResource {
 	private ClienteService service;
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	private ResponseEntity<?> find(@PathVariable Integer id) {
+	public ResponseEntity<?> find(@PathVariable Integer id) {
 		Cliente obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
@@ -67,7 +67,7 @@ public class ClienteResource {
 	}
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(method = RequestMethod.GET)
-	private ResponseEntity<List<ClienteDTO>> find() {
+	public ResponseEntity<List<ClienteDTO>> find() {
 		List<Cliente> list = service.findAll();
 		List<ClienteDTO> listDto = list.stream().map(obj -> new ClienteDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDto);
@@ -75,7 +75,7 @@ public class ClienteResource {
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
-	private ResponseEntity<Page<ClienteDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
+	public ResponseEntity<Page<ClienteDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "12") Integer linesPerPage,
 			@RequestParam(value = "orderBy", defaultValue = "nome") String orderBy,
 			@RequestParam(value = "direction", defaultValue = "ASC") String direction) {

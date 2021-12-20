@@ -3,6 +3,9 @@ package com.feliciano.demo.services;
 import java.util.List;
 import java.util.Optional;
 
+import com.feliciano.demo.resources.domain.enums.Perfil;
+import com.feliciano.demo.security.SpringSecurityUser;
+import com.feliciano.demo.services.exceptions.AuthorizationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,6 +38,13 @@ public class ClienteService {
 	private BCryptPasswordEncoder per;
 
 	public Cliente find(Integer id) {
+
+		SpringSecurityUser user = UserService.authenticated();
+
+		if(user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())){
+			throw new AuthorizationException("Acesso negado");
+		}
+
 		Optional<Cliente> obj = repo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));

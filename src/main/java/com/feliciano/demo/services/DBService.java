@@ -118,7 +118,6 @@ public class DBService {
 
 		Cliente cli2 = new Cliente(null, "Vitor", "mfeliciano@keemail.me", "00000001",
 				TipoCliente.PESSOAFISICA, per.encode("123"));
-
 		cli2.getTelefones().addAll(Arrays.asList("121434390", "025073837"));
 		cli2.addPerfil(Perfil.ADMIN);
 
@@ -127,6 +126,7 @@ public class DBService {
 		Endereco end3 = new Endereco(null, "Rua sucesso", "99", "Condominio", "Cabine zoo", "3747430", cid2, cli2);
 
 		cli1.getEnderecos().addAll(Arrays.asList(end1, end2));
+		cli2.getEnderecos().addAll(Arrays.asList(end3));
 
 		clienteRepository.saveAll(Arrays.asList(cli1, cli2));
 		enderecoRepository.saveAll(Arrays.asList(end1, end2, end3));
