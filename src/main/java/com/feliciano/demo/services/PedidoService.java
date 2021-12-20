@@ -5,15 +5,19 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import com.feliciano.demo.repositories.ClienteRepository;
+import com.feliciano.demo.resources.domain.*;
+import com.feliciano.demo.security.SpringSecurityUser;
+import com.feliciano.demo.services.exceptions.AuthorizationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.feliciano.demo.repositories.ItemPedidoRepository;
 import com.feliciano.demo.repositories.PagamentoRepository;
 import com.feliciano.demo.repositories.PedidoRepository;
-import com.feliciano.demo.resources.domain.ItemPedido;
-import com.feliciano.demo.resources.domain.PagamentoComBoleto;
-import com.feliciano.demo.resources.domain.Pedido;
 import com.feliciano.demo.resources.domain.enums.EstadoPagamento;
 import com.feliciano.demo.services.exceptions.ObjectNotFoundException;
 
@@ -64,5 +68,16 @@ public class PedidoService {
 		itemPedidoRepository.saveAll(obj.getItens());
 		emailService.sendOrderConfirmationHtmlEmail(obj);
 		return obj;
+	}
+
+	public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+		SpringSecurityUser user = UserService.authenticated();
+		if(user == null){
+			throw  new AuthorizationException("Acesso negado");
+		}
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+		Cliente cliente = clienteService.find(user.getId());
+		return repo.findByCliente(cliente, pageRequest);
+
 	}
 }
