@@ -1,150 +1,148 @@
 package com.feliciano.demo.dto;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.feliciano.demo.services.validation.ClienteInsert;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-
-import org.hibernate.validator.constraints.Length;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.feliciano.demo.services.validation.ClienteInsert;
+import java.io.Serializable;
 
 @ClienteInsert
 public class ClienteNewDTO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	@NotEmpty(message = "Preenchiento obrigatório")
-	@Length(min = 5, max = 100, message = "O cliente '${validatedValue}' deve ter entre {min} e {max} characteres")
-	private String nome;
-	@NotEmpty(message = "Preenchiento obrigatório")
-	@Email(message = "E-mail inválido")
-	private String email;
-	@NotEmpty(message = "Preenchiento obrigatório")
-	private String cpfOrCnpj;
-	private Integer tipo;
-	@NotEmpty(message = "Preenchiento obrigatório")
-	private String logradouro;
-	@NotEmpty(message = "Preenchiento obrigatório")
-	private String numero;
-	private String complemento;
-	@NotEmpty(message = "Preenchiento obrigatório")
-	private String bairro;
-	private String cep;
-	@NotEmpty(message = "Preenchiento obrigatório")
-	private String telefone1;
-	private String telefone2;
+    private static final long serialVersionUID = 1L;
+    @NotEmpty(message = "Preenchiento obrigatório")
+    @Length(min = 5, max = 100, message = "O cliente '${validatedValue}' deve ter entre {min} e {max} characteres")
+    private String nome;
+    @NotEmpty(message = "Preenchiento obrigatório")
+    @Email(message = "E-mail inválido")
+    private String email;
+    @NotEmpty(message = "Preenchiento obrigatório")
+    private String cpfOrCnpj;
+    private Integer tipo;
+    @NotEmpty(message = "Preenchiento obrigatório")
+    private String logradouro;
+    @NotEmpty(message = "Preenchiento obrigatório")
+    private String numero;
+    private String complemento;
+    @NotEmpty(message = "Preenchiento obrigatório")
+    private String bairro;
+    private String cep;
+    @NotEmpty(message = "Preenchiento obrigatório")
+    private String telefone1;
+    private String telefone2;
 
-	private Integer cidadeId;
+    private Integer cidadeId;
 
-	@JsonIgnore
-	private String senha;
-	
-	public ClienteNewDTO() {
-	}
+    @JsonIgnore
+    private String senha;
 
-	public String getNome() {
-		return nome;
-	}
+    public ClienteNewDTO() {
+    }
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	public String getSenha() {
-		return senha;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getCpfOrCnpj() {
-		return cpfOrCnpj;
-	}
+    public String getSenha() {
+        return senha;
+    }
 
-	public void cpfOrCnpj(String cpfOrCnpj) {
-		this.cpfOrCnpj = cpfOrCnpj;
-	}
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
-	public Integer getTipo() {
-		return tipo;
-	}
+    public String getCpfOrCnpj() {
+        return cpfOrCnpj;
+    }
 
-	public void setTipo(Integer tipo) {
-		this.tipo = tipo;
-	}
+    public void cpfOrCnpj(String cpfOrCnpj) {
+        this.cpfOrCnpj = cpfOrCnpj;
+    }
 
-	public String getLogradouro() {
-		return logradouro;
-	}
+    public Integer getTipo() {
+        return tipo;
+    }
 
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
+    public void setTipo(Integer tipo) {
+        this.tipo = tipo;
+    }
 
-	public String getNumero() {
-		return numero;
-	}
+    public String getLogradouro() {
+        return logradouro;
+    }
 
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
 
-	public String getComplemento() {
-		return complemento;
-	}
+    public String getNumero() {
+        return numero;
+    }
 
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
 
-	public String getBairro() {
-		return bairro;
-	}
+    public String getComplemento() {
+        return complemento;
+    }
 
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
 
-	public String getCep() {
-		return cep;
-	}
+    public String getBairro() {
+        return bairro;
+    }
 
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
 
-	public String getTelefone1() {
-		return telefone1;
-	}
+    public String getCep() {
+        return cep;
+    }
 
-	public void setTelefone1(String telefone1) {
-		this.telefone1 = telefone1;
-	}
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
 
-	public String getTelefone2() {
-		return telefone2;
-	}
+    public String getTelefone1() {
+        return telefone1;
+    }
 
-	public void setTelefone2(String telefone2) {
-		this.telefone2 = telefone2;
-	}
+    public void setTelefone1(String telefone1) {
+        this.telefone1 = telefone1;
+    }
 
-	public Integer getCidadeId() {
-		return cidadeId;
-	}
+    public String getTelefone2() {
+        return telefone2;
+    }
 
-	public void setCidadeId(Integer cidadeId) {
-		this.cidadeId = cidadeId;
-	}
+    public void setTelefone2(String telefone2) {
+        this.telefone2 = telefone2;
+    }
+
+    public Integer getCidadeId() {
+        return cidadeId;
+    }
+
+    public void setCidadeId(Integer cidadeId) {
+        this.cidadeId = cidadeId;
+    }
 
 }

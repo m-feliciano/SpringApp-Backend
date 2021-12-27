@@ -1,153 +1,139 @@
 package com.feliciano.demo.resources.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.*;
 
 @Entity
 public class Pedido implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-	@JsonFormat(pattern = "dd/MM/yy HH:mm")
-	private Date instante;
+    @JsonFormat(pattern = "dd/MM/yy HH:mm")
+    private Date instante;
 
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
-	private Pagamento pagamento;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
+    private Pagamento pagamento;
 
-	@ManyToOne
-	@JoinColumn(name = "cliente_id")
-	private Cliente cliente;
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente;
 
-	@ManyToOne
-	@JoinColumn(name = "endereco_de_entrega_id")
-	private Endereco enderecoEntrega;
+    @ManyToOne
+    @JoinColumn(name = "endereco_de_entrega_id")
+    private Endereco enderecoEntrega;
 
-	@OneToMany(mappedBy = "id.pedido")
-	private Set<ItemPedido> itens = new HashSet<>();
+    @OneToMany(mappedBy = "id.pedido")
+    private Set<ItemPedido> itens = new HashSet<>();
 
-	public Pedido() {
-	}
+    public Pedido() {
+    }
 
-	public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoEntrega) {
-		super();
-		this.id = id;
-		this.setInstante(instante);
-		this.setCliente(cliente);
-		this.setEnderecoEntrega(enderecoEntrega);
-	}
+    public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoEntrega) {
+        super();
+        this.id = id;
+        this.setInstante(instante);
+        this.setCliente(cliente);
+        this.setEnderecoEntrega(enderecoEntrega);
+    }
 
-	public double getValorTotal() {
-		return itens.stream().map(p -> p.getSubtotal()).reduce(0.0, (total, acumulador) -> total + acumulador)
-				.doubleValue();
-	}
+    public double getValorTotal() {
+        return itens.stream().map(p -> p.getSubtotal()).reduce(0.0, (total, acumulador) -> total + acumulador)
+                .doubleValue();
+    }
 
-	public Endereco getEnderecoEntrega() {
-		return enderecoEntrega;
-	}
+    public Endereco getEnderecoEntrega() {
+        return enderecoEntrega;
+    }
 
-	public void setEnderecoEntrega(Endereco enderecoEntrega) {
-		this.enderecoEntrega = enderecoEntrega;
-	}
+    public void setEnderecoEntrega(Endereco enderecoEntrega) {
+        this.enderecoEntrega = enderecoEntrega;
+    }
 
-	public Cliente getCliente() {
-		return cliente;
-	}
+    public Cliente getCliente() {
+        return cliente;
+    }
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 
-	public Date getInstante() {
-		return instante;
-	}
+    public Date getInstante() {
+        return instante;
+    }
 
-	public void setInstante(Date instante) {
-		this.instante = instante;
-	}
+    public void setInstante(Date instante) {
+        this.instante = instante;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if ((obj == null) || (getClass() != obj.getClass()))
-			return false;
-		Pedido other = (Pedido) obj;
-		return Objects.equals(id, other.id);
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if ((obj == null) || (getClass() != obj.getClass()))
+            return false;
+        Pedido other = (Pedido) obj;
+        return Objects.equals(id, other.id);
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public Pagamento getPagamento() {
-		return pagamento;
-	}
+    public Pagamento getPagamento() {
+        return pagamento;
+    }
 
-	public void setPagamento(Pagamento pagamento) {
-		this.pagamento = pagamento;
-	}
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
+    }
 
-	public Set<ItemPedido> getItens() {
-		return itens;
-	}
+    public Set<ItemPedido> getItens() {
+        return itens;
+    }
 
-	public void setItens(Set<ItemPedido> itens) {
-		this.itens = itens;
-	}
+    public void setItens(Set<ItemPedido> itens) {
+        this.itens = itens;
+    }
 
-	@Override
-	public String toString() {
-		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");	
-		StringBuilder builder = new StringBuilder();
-		builder.append("Pedido número: ");
-		builder.append(getId());
-		builder.append("\nInstante: ");
-		builder.append(sdf.format(getInstante()));
-		builder.append("\nCliente: ");
-		builder.append(getCliente().getNome());
-		builder.append("\nSituação do pagamento: ");
-		builder.append(getPagamento().getEstado().getDescricao());
-		builder.append("\nDetalhes:\n");
-		for(ItemPedido ip: getItens()) {
-			builder.append(ip.toString());			
-		}
-		builder.append("ValorTotal: ");
-		builder.append(nf.format(getValorTotal()));		
-		return builder.toString();
-	}
-	
-	
+    @Override
+    public String toString() {
+        NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        StringBuilder builder = new StringBuilder();
+        builder.append("Pedido número: ");
+        builder.append(getId());
+        builder.append("\nInstante: ");
+        builder.append(sdf.format(getInstante()));
+        builder.append("\nCliente: ");
+        builder.append(getCliente().getNome());
+        builder.append("\nSituação do pagamento: ");
+        builder.append(getPagamento().getEstado().getDescricao());
+        builder.append("\nDetalhes:\n");
+        for (ItemPedido ip : getItens()) {
+            builder.append(ip.toString());
+        }
+        builder.append("ValorTotal: ");
+        builder.append(nf.format(getValorTotal()));
+        return builder.toString();
+    }
+
 
 }

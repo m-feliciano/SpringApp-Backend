@@ -1,7 +1,5 @@
 package com.feliciano.demo.services;
 
-import javax.mail.internet.MimeMessage;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,30 +7,30 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 
-public class SmtpEmailService extends AbstractEmailService{
+import javax.mail.internet.MimeMessage;
 
-	@Autowired
-	private MailSender mailSender;
-	
-	@Autowired
-	private JavaMailSender jmaSender;
-	
-	private static final Logger LOG = LoggerFactory.getLogger(SmtpEmailService.class);
-	
-	@Override
-	public void sendEmail(SimpleMailMessage msg) {
-		LOG.info("Enviando email...");
-		mailSender.send(msg);
-		LOG.info("Email enviado");
-		
-	}
+public class SmtpEmailService extends AbstractEmailService {
 
-	@Override
-	public void sendHtmlEmail(MimeMessage msg) {
-		LOG.info("Enviando email...");
-		jmaSender.send(msg);
-		LOG.info("Email enviado");
-		
-	}
+    private static final Logger LOG = LoggerFactory.getLogger(SmtpEmailService.class);
+    @Autowired
+    private MailSender mailSender;
+    @Autowired
+    private JavaMailSender jmaSender;
+
+    @Override
+    public void sendEmail(SimpleMailMessage msg) {
+        LOG.info("Enviando email...");
+        mailSender.send(msg);
+        LOG.info("Email enviado");
+
+    }
+
+    @Override
+    public void sendHtmlEmail(MimeMessage msg) {
+        LOG.info("Enviando email...");
+        jmaSender.send(msg);
+        LOG.info("Email enviado");
+
+    }
 
 }
