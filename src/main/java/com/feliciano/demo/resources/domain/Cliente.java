@@ -26,6 +26,7 @@ public class Cliente implements Serializable {
     private Integer tipo;
     @JsonIgnore
     private String senha;
+
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL) // @cascate(ALL) delete in cascate(all) enderecos from
     // cliente
     private List<Endereco> enderecos = new ArrayList<>();
@@ -153,14 +154,14 @@ public class Cliente implements Serializable {
     }
 
     /**
-     * @param tipoCliente the tipoCliente to set
+     * @param tipo the tipoCliente to set
      */
     public void setTipo(TipoCliente tipo) {
         this.tipo = tipo.getCod();
     }
 
     public Set<Perfil> getPerfils() {
-        return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
+        return perfis.stream().map(Perfil::toEnum).collect(Collectors.toSet());
     }
 
     public void addPerfil(Perfil perfil) {

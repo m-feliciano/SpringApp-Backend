@@ -81,7 +81,7 @@ public class ClienteResource {
     }
 
     @RequestMapping(value = "/picture", method = RequestMethod.POST)
-    public ResponseEntity<Void> uploadProfilePicture(@RequestParam(name = "file") MultipartFile file) { // @RequestParam search about filename
+    public ResponseEntity<Void> uploadProfilePicture(@RequestParam(name = "file") MultipartFile file) { // @RequestParam about filename
         URI uri = service.uploadProfilePicture(file);
         return ResponseEntity.created(uri).build();
     }

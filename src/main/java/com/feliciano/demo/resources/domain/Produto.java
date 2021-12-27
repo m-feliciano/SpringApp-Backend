@@ -39,7 +39,7 @@ public class Produto implements Serializable {
     @JsonIgnore // deny serialization
     public List<Pedido> getPedidos() {
         List<Pedido> lista = new ArrayList<>();
-        lista.forEach(p -> lista.add(p));
+        lista.forEach(lista::add);
         return lista;
     }
 

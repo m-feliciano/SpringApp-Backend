@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +33,7 @@ public class ProdutoService {
                                 String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
         List<Categoria> categorias = catRepo.findAllById(ids);
-        return repo.findDistinctByNomeContainingAndCategoriasIn(nome, categorias, pageRequest);
+        return repo.findDistinctByNomeContainingAndCategoriasIn(nome, Collections.singleton(categorias), pageRequest);
 
     }
 }

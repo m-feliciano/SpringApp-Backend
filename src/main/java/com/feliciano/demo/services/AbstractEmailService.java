@@ -60,7 +60,7 @@ public abstract class AbstractEmailService implements EmailService {
 
     private MimeMessage prepareMimeMessageFromPedido(Pedido obj) throws MessagingException {
         MimeMessage mimeMessage = jmSender.createMimeMessage();
-        MimeMessageHelper mmh = new MimeMessageHelper(mimeMessage, true); //true: informs that this is an html
+        MimeMessageHelper mmh = new MimeMessageHelper(mimeMessage, true); //true: informs that this is a html
         mmh.setTo(obj.getCliente().getEmail());
         mmh.setFrom(sender);
         mmh.setSubject("Pedido confirmado! Codigo: " + obj.getId());
