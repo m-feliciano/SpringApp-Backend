@@ -2,6 +2,7 @@ package com.feliciano.demo.services;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.feliciano.demo.services.exceptions.FileException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class S3Service {
             LOG.info("Upload completed!");
             return s3client.getUrl(bucketName, fileName).toURI();
         } catch (URISyntaxException e) {
-            throw new RuntimeException("Error converting URL to URI");
+            throw new FileException("Error converting URL to URI");
         }
     }
 }
