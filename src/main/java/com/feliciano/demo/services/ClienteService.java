@@ -49,6 +49,9 @@ public class ClienteService {
     @Value("${img.prefix.client.profile}")
     private String prefix;
 
+    @Value("${img.profile.size}")
+    private int size;
+
     public Cliente find(Integer id) {
         SpringSecurityUser user = UserService.authenticated();
         if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())) {
@@ -128,7 +131,12 @@ public class ClienteService {
         if (user == null) {
             throw new AuthorizationException("Access denied!");
         }
+
         BufferedImage jpgImage = imageService.getJpgImageFromFile(multipartFile);
+
+        jpgImage = imageService.cropSquare(jpgImage);
+        jpgImage = imageService.resize(jpgImage, size);
+
         String fileName = prefix + user.getId() + ".jpg";
         return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");
 

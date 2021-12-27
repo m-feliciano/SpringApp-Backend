@@ -22,7 +22,7 @@ public class DevConfig {
     private String profile;
 
     @Bean
-    public boolean instanciateDatabase() throws ParseException {
+    public boolean instantiateDatabase() throws ParseException {
 
         if (!"create".equals(profile)) {
             return false;
@@ -33,7 +33,7 @@ public class DevConfig {
     }
 
     @Bean
-    public EmailService emailSevice() {
+    public EmailService emailService() {
         return new SmtpEmailService();
     }
 
