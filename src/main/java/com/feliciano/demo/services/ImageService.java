@@ -35,7 +35,7 @@ public class ImageService {
 
     private BufferedImage pngToJpg(BufferedImage img) {
         BufferedImage jpgImage = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
-        // fill the background of transparent png images with white
+        // fill the background transparent png images with white
         jpgImage.createGraphics().drawImage(img, 0, 0, Color.WHITE, null);
         return jpgImage;
     }

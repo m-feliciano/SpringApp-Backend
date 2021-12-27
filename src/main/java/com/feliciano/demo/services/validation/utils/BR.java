@@ -28,8 +28,8 @@ public class BR {
         if ((ssn == null) || (ssn.length() != 11) || ssn.matches(ssn.charAt(0) + "{11}"))
             return false;
 
-        final Integer digit1 = calculate(ssn.substring(0, 9), weightSsn);
-        final Integer digit2 = calculate(ssn.substring(0, 9) + digit1, weightSsn);
+        final int digit1 = calculate(ssn.substring(0, 9), weightSsn);
+        final int digit2 = calculate(ssn.substring(0, 9) + digit1, weightSsn);
         return ssn.equals(ssn.substring(0, 9) + digit1 + digit2);
     }
 
@@ -43,8 +43,8 @@ public class BR {
         if ((tin == null) || (tin.length() != 14) || tin.matches(tin.charAt(0) + "{14}"))
             return false;
 
-        final Integer digit1 = calculate(tin.substring(0, 12), weightTin);
-        final Integer digit2 = calculate(tin.substring(0, 12) + digit1, weightTin);
+        final int digit1 = calculate(tin.substring(0, 12), weightTin);
+        final int digit2 = calculate(tin.substring(0, 12) + digit1, weightTin);
         return tin.equals(tin.substring(0, 12) + digit1 + digit2);
     }
 
