@@ -26,6 +26,7 @@ public class Cliente implements Serializable {
     private Integer tipo;
     @JsonIgnore
     private String senha;
+
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL) // @cascate(ALL) delete in cascate(all) enderecos from
     // cliente
     private List<Endereco> enderecos = new ArrayList<>();
@@ -36,6 +37,16 @@ public class Cliente implements Serializable {
     @JsonBackReference // deny serialization by Pedido
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<>();
+
+    private String imgUrl;
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
 
     public Cliente() {
         addPerfil(Perfil.CLIENTE);
