@@ -1,82 +1,80 @@
 package com.feliciano.demo.dto;
 
-import java.io.Serializable;
+import com.feliciano.demo.resources.domain.Cliente;
+import com.feliciano.demo.services.validation.ClienteUpdate;
+import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-
-import org.hibernate.validator.constraints.Length;
-
-import com.feliciano.demo.resources.domain.Cliente;
-import com.feliciano.demo.services.validation.ClienteUpdate;
+import java.io.Serializable;
 
 @ClienteUpdate
 public class ClienteDTO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private Integer id;
+    private Integer id;
 
-	@NotEmpty(message = "Preenchiento obrigatório")
-	@Length(min = 5, max = 100, message = "O cliente '${validatedValue}' deve ter entre {min} e {max} characteres")
-	private String nome;
+    @NotEmpty(message = "Preenchiento obrigatório")
+    @Length(min = 5, max = 100, message = "O cliente '${validatedValue}' deve ter entre {min} e {max} characteres")
+    private String nome;
 
-	@NotEmpty(message = "Preenchiento obrigatório")
-	@Email(message = "E-mail inválido")
-	private String email;
+    @NotEmpty(message = "Preenchiento obrigatório")
+    @Email(message = "E-mail inválido")
+    private String email;
 
-	public ClienteDTO() {
-		super();
-	}
+    public ClienteDTO() {
+        super();
+    }
 
-	public ClienteDTO(Cliente obj) {
-		super();
-		id = obj.getId();
-		nome = obj.getNome();
-		email = obj.getEmail();
-	}
+    public ClienteDTO(Cliente obj) {
+        super();
+        id = obj.getId();
+        nome = obj.getNome();
+        email = obj.getEmail();
+    }
 
-	public ClienteDTO(Integer id, String nome, String email) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.email = email;
-	}
+    public ClienteDTO(Integer id, String nome, String email) {
+        super();
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+    }
 
-	/**
-	 * @return the id
-	 */
-	public Integer getId() {
-		return id;
-	}
+    /**
+     * @return the id
+     */
+    public Integer getId() {
+        return id;
+    }
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    /**
+     * @param id the id to set
+     */
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	/**
-	 * @return the nome
-	 */
-	public String getNome() {
-		return nome;
-	}
+    /**
+     * @return the nome
+     */
+    public String getNome() {
+        return nome;
+    }
 
-	/**
-	 * @param nome the nome to set
-	 */
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    /**
+     * @param nome the nome to set
+     */
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
 }

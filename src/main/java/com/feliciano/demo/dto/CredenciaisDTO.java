@@ -4,35 +4,35 @@ import java.io.Serializable;
 
 public class CredenciaisDTO implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private String email;
-	private String senha;
+    private String email;
+    private String senha;
 
-	public CredenciaisDTO(String email, String senha) {
-		super();
-		this.setEmail(email);
-		this.setSenha(senha);
-	}
+    public CredenciaisDTO(String email, String senha) {
+        super();
+        this.setEmail(email);
+        this.setSenha(senha);
+    }
 
-	public CredenciaisDTO() {
-		super();
-	}
+    public CredenciaisDTO() {
+        super();
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getSenha() {
-		return senha;
-	}
+    public String getSenha() {
+        return senha;
+    }
 
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 
 }

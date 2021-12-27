@@ -1,25 +1,21 @@
 package com.feliciano.demo.resources.utils;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class URL {
 
-	public static String decodeParam(String s) {
-		try {
-			return URLDecoder.decode(s, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			return "";
-		}
-	}
+    public static String decodeParam(String s) {
+        return URLDecoder.decode(s, StandardCharsets.UTF_8);
+    }
 
-	public static List<Integer> decodeInList(String s) {
+    public static List<Integer> decodeInList(String s) {
 
-		return Arrays.asList(s.split(",")).stream().map(x -> Integer.parseInt(x)).collect(Collectors.toList());
+        return Arrays.asList(s.split(",")).stream().map(x -> Integer.parseInt(x)).collect(Collectors.toList());
 
-	}
+    }
 
 }

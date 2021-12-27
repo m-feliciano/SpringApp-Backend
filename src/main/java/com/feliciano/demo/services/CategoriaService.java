@@ -1,64 +1,63 @@
 package com.feliciano.demo.services;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.feliciano.demo.dto.CategoriaDTO;
+import com.feliciano.demo.repositories.CategoriaRepository;
+import com.feliciano.demo.resources.domain.Categoria;
+import com.feliciano.demo.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.feliciano.demo.dto.CategoriaDTO;
-import com.feliciano.demo.repositories.CategoriaRepository;
-import com.feliciano.demo.resources.domain.Categoria;
-import com.feliciano.demo.services.exceptions.ObjectNotFoundException;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoriaService {
 
-	@Autowired
-	private CategoriaRepository repo;
+    @Autowired
+    private CategoriaRepository repo;
 
-	public Categoria find(Integer id) {
-		Optional<Categoria> obj = repo.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
-	}
+    public Categoria find(Integer id) {
+        Optional<Categoria> obj = repo.findById(id);
+        return obj.orElseThrow(() -> new ObjectNotFoundException(
+                "Objeto não encontrado! Id: " + id + ", Tipo: " + Categoria.class.getName()));
+    }
 
-	public Categoria insert(Categoria obj) {
-		obj.setId(null); // it doesn't allow the passing of id to database
-		return repo.save(obj);
-	}
+    public Categoria insert(Categoria obj) {
+        obj.setId(null); // it doesn't allow the passing of id to database
+        return repo.save(obj);
+    }
 
-	public Categoria update(Categoria obj) {
-		Categoria newObj = find(obj.getId());
-		updateData(newObj, obj);
-		return repo.save(newObj);
-	}
+    public Categoria update(Categoria obj) {
+        Categoria newObj = find(obj.getId());
+        updateData(newObj, obj);
+        return repo.save(newObj);
+    }
 
-	private void updateData(Categoria newObj, Categoria obj) {
-		newObj.setNome(obj.getNome());
-	}
+    private void updateData(Categoria newObj, Categoria obj) {
+        newObj.setNome(obj.getNome());
+    }
 
-	public void delete(Integer id) {
-		find(id);
-		repo.deleteById(id);
-	}
+    public void delete(Integer id) {
+        find(id);
+        repo.deleteById(id);
+    }
 
-	public List<Categoria> findAll() {
-		return repo.findAll();
-	}
+    public List<Categoria> findAll() {
+        return repo.findAll();
+    }
 
-	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
-		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
-		return repo.findAll(pageRequest);
+    public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+        return repo.findAll(pageRequest);
 
-	}
+    }
 
-	public Categoria fromDTO(CategoriaDTO objDto) {
-		return new Categoria(objDto.getId(), objDto.getNome());
+    public Categoria fromDTO(CategoriaDTO objDto) {
+        return new Categoria(objDto.getId(), objDto.getNome());
 
-	}
+    }
 
 }
