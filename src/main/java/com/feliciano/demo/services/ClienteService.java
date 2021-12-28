@@ -95,15 +95,23 @@ public class ClienteService {
         return repo.findAll();
     }
 
+    public Cliente findByEmail(String email) {
+        SpringSecurityUser user = UserService.authenticated();
+        if (user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())) {
+            throw new AuthorizationException("Access denied!");
+        }
+        Cliente cli = repo.findByEmail(email);
+        if (cli != null) return cli;
+        throw new ObjectNotFoundException("Object not found! id: " + user.getId() + ", Type: " + Cliente.class.getName());
+    }
+
     public Page<Cliente> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
         return repo.findAll(pageRequest);
-
     }
 
     public Cliente fromDTO(ClienteDTO objDto) {
         return new Cliente(objDto.getId(), objDto.getNome(), objDto.getEmail(), null, null, null);
-
     }
 
     public Cliente fromDTO(ClienteNewDTO objDto) {
