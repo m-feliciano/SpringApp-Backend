@@ -33,6 +33,12 @@ public class ClienteResource {
         return ResponseEntity.ok().body(obj);
     }
 
+    @RequestMapping(value = "/email", method = RequestMethod.GET)
+    public ResponseEntity<?> find(@RequestParam(value = "value") String email) {
+        Cliente obj = service.findByEmail(email);
+        return ResponseEntity.ok().body(obj);
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDto) { // @RequestBody converts JSON to // object body
         Cliente obj = service.fromDTO(objDto);
@@ -85,5 +91,4 @@ public class ClienteResource {
         URI uri = service.uploadProfilePicture(file);
         return ResponseEntity.created(uri).build();
     }
-
 }
