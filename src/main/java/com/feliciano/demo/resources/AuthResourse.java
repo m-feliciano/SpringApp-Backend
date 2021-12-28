@@ -28,8 +28,8 @@ public class AuthResourse {
     @RequestMapping(value = "/refresh_token", method = RequestMethod.POST)
     public ResponseEntity<Void> refreshToken(HttpServletResponse response) {
         SpringSecurityUser user = UserService.authenticated();
-        assert user != null;
-        String token = jwtUtil.generateToken(user.getUsername());
+        String token = null;
+        if(user != null) token = jwtUtil.generateToken(user.getUsername());
         response.addHeader("Authorization", "Bearer " + token);
         response.addHeader("access-control-expose-headers", "Authorization");
         return ResponseEntity.noContent().build();

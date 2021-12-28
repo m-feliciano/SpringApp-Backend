@@ -1,6 +1,5 @@
 package com.feliciano.demo.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.feliciano.demo.services.validation.ClienteInsert;
 import org.hibernate.validator.constraints.Length;
 
@@ -35,7 +34,7 @@ public class ClienteNewDTO implements Serializable {
 
     private Integer cidadeId;
 
-    @JsonIgnore
+    @NotEmpty(message="Preenchimento obrigatório")
     private String senha;
 
     public ClienteNewDTO() {
