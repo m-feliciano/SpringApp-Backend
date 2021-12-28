@@ -25,12 +25,6 @@ public class CategoriaDTO implements Serializable {
         nome = obj.getNome();
     }
 
-    public CategoriaDTO(Integer id, String nome) {
-        super();
-        this.id = id;
-        this.nome = nome;
-    }
-
     /**
      * @return the serialversionuid
      */

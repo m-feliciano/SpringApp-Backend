@@ -21,7 +21,6 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
-import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -29,7 +28,7 @@ import java.util.List;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] PUBLIC_MATCHERS = {"/h2-console/**"};
-    private static final String[] PUBLIC_MATCHERS_GET = {"/produtos/**", "/categorias/**", "/estados/**", "/cidades/**"};
+    private static final String[] PUBLIC_MATCHERS_GET = {"/produtos/**", "/categorias/**", "/estados/**"};
     private static final String[] PUBLIC_MATCHERS_POST = {"/clientes", "/auth/forgot/**"};
     @Autowired
     private Environment env;
@@ -64,14 +63,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedMethods(List.of(
-                HttpMethod.GET.name(),
-                HttpMethod.PUT.name(),
-                HttpMethod.POST.name(),
-                HttpMethod.DELETE.name()));
+        CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();
+        configuration.setAllowedMethods(Arrays.asList("POST", "GET", "PUT", "DELETE", "OPTIONS"));
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+        source.registerCorsConfiguration("/**", configuration);
         return source;
     }
 

@@ -3,8 +3,10 @@ package com.feliciano.demo.services;
 import com.feliciano.demo.dto.CategoriaDTO;
 import com.feliciano.demo.repositories.CategoriaRepository;
 import com.feliciano.demo.resources.domain.Categoria;
+import com.feliciano.demo.services.exceptions.DataIntegrityException;
 import com.feliciano.demo.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
@@ -42,7 +44,11 @@ public class CategoriaService {
 
     public void delete(Integer id) {
         find(id);
-        repo.deleteById(id);
+        try {
+            repo.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityException("Cannot delete a categoria that has products");
+        }
     }
 
     public List<Categoria> findAll() {
