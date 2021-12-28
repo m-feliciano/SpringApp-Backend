@@ -65,6 +65,7 @@ public class PedidoService {
             p.setPreco(p.getProduto().getPreco());
             p.setPedido(obj);
         }
+
         itemPedidoRepository.saveAll(obj.getItens());
         emailService.sendOrderConfirmationHtmlEmail(obj);
         return obj;
