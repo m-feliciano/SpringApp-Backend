@@ -1,14 +1,21 @@
 package com.feliciano.demo.resources.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Getter
+@Setter
 @Embeddable // means subtipo
 public class ItemPedidoPK implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @ManyToOne
@@ -24,34 +31,6 @@ public class ItemPedidoPK implements Serializable {
      */
     public static long getSerialversionuid() {
         return serialVersionUID;
-    }
-
-    /**
-     * @return the pedido
-     */
-    public Pedido getPedido() {
-        return pedido;
-    }
-
-    /**
-     * @param pedido the pedio to set
-     */
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
-    }
-
-    /**
-     * @return the produto
-     */
-    public Produto getProduto() {
-        return produto;
-    }
-
-    /**
-     * @param produto the produto to set
-     */
-    public void setProduto(Produto produto) {
-        this.produto = produto;
     }
 
     @Override

@@ -3,9 +3,7 @@ package com.feliciano.demo.resources;
 import com.feliciano.demo.dto.CategoriaDTO;
 import com.feliciano.demo.resources.domain.Categoria;
 import com.feliciano.demo.services.CategoriaService;
-import com.feliciano.demo.services.exceptions.DataIntegrityException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -54,11 +52,7 @@ public class CategoriaResource {
     @PreAuthorize("hasAnyRole('ADMIN')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
-        try {
-            service.delete(id);
-        } catch (DataIntegrityViolationException e) {
-            throw new DataIntegrityException("Não é posisvel excluir uma categoria que possui produtos!");
-        }
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
 

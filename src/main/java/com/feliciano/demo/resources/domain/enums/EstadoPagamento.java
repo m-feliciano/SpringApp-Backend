@@ -1,11 +1,13 @@
 package com.feliciano.demo.resources.domain.enums;
 
+import lombok.Getter;
+
 public enum EstadoPagamento {
 
     PENDENTE(1, "Pendente"), QUITADO(2, "Quitado"), CANCELADO(3, "Cancelado");
 
-    private final int cod;
-    private final String descricao;
+    @Getter private final int cod;
+    @Getter private final String descricao;
 
     EstadoPagamento(int cod, String descricao) {
         this.cod = cod;
@@ -22,19 +24,5 @@ public enum EstadoPagamento {
             }
         }
         throw new IllegalAccessError("Id invalido" + cod);
-    }
-
-    /**
-     * @return the cod
-     */
-    public int getCod() {
-        return cod;
-    }
-
-    /**
-     * @return the descricao
-     */
-    public String getDescricao() {
-        return descricao;
     }
 }

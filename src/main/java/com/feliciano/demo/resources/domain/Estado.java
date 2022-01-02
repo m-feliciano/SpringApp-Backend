@@ -1,16 +1,24 @@
 package com.feliciano.demo.resources.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Estado implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -22,56 +30,10 @@ public class Estado implements Serializable {
     @OneToMany(mappedBy = "estado")
     private List<Cidade> cidades = new ArrayList<>();
 
-    public Estado() {
-        super();
-    }
-
     public Estado(Integer id, String nome) {
         super();
         this.id = id;
         this.nome = nome;
-    }
-
-    /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the nome
-     */
-    public String getNome() {
-        return nome;
-    }
-
-    /**
-     * @param nome the nome to set
-     */
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    /**
-     * @return the cidade
-     */
-    public List<Cidade> getCidades() {
-        return cidades;
-    }
-
-    /**
-     * @param cidade the cidade to set
-     */
-    public void setCidade(List<Cidade> cidade) {
-        this.cidades = cidade;
     }
 
     @Override

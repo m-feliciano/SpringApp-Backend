@@ -4,15 +4,22 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.feliciano.demo.resources.domain.enums.Perfil;
 import com.feliciano.demo.resources.domain.enums.TipoCliente;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Getter
+@Setter
 @Entity
 public class Cliente implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "PERFIS")
@@ -54,98 +61,6 @@ public class Cliente implements Serializable {
     }
 
     /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    /**
-     * @return the nome
-     */
-    public String getNome() {
-        return nome;
-    }
-
-    /**
-     * @param nome the nome to set
-     */
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     * @return the cpfOrCnpj
-     */
-    public String getCpf() {
-        return cpfOrCnpj;
-    }
-
-    /**
-     * @param cpfOrCnpj the cpfOrCnpj to set
-     */
-    public void setCpf(String cpfOrCnpj) {
-        this.cpfOrCnpj = cpfOrCnpj;
-    }
-
-    /**
-     * @return the enderecos
-     */
-    public List<Endereco> getEnderecos() {
-        return enderecos;
-    }
-
-    /**
-     * @param enderecos the enderecos to set
-     */
-    public void setEnderecos(List<Endereco> enderecos) {
-        this.enderecos = enderecos;
-    }
-
-    /**
-     * @return the telefones
-     */
-    public Set<String> getTelefones() {
-        return telefones;
-    }
-
-    /**
-     * @param telefones the telefones to set
-     */
-    public void setTelefones(Set<String> telefones) {
-        this.telefones = telefones;
-    }
-
-    /**
      * @return the tipoCliente
      * @throws IllegalAccessException
      */
@@ -169,26 +84,15 @@ public class Cliente implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Cliente cliente = (Cliente) o;
+        return id != null && Objects.equals(id, cliente.id);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if ((obj == null) || (getClass() != obj.getClass()))
-            return false;
-        Cliente other = (Cliente) obj;
-        return Objects.equals(id, other.id);
+    public int hashCode() {
+        return getClass().hashCode();
     }
-
-    public List<Pedido> getPedidos() {
-        return pedidos;
-    }
-
-    public void setPedidos(List<Pedido> pedidos) {
-        this.pedidos = pedidos;
-    }
-
 }

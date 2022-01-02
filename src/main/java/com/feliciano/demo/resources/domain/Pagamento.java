@@ -3,32 +3,34 @@ package com.feliciano.demo.resources.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.feliciano.demo.resources.domain.enums.EstadoPagamento;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 public abstract class Pagamento implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Getter @Setter private Integer id;
     private Integer estado;
 
     @JsonIgnore // deny serialization
     @OneToOne
     @JoinColumn(name = "pedido_id")
     @MapsId
-    private Pedido pedido;
-
-    public Pagamento() {
-        super();
-    }
+   @Getter @Setter private Pedido pedido;
 
     public Pagamento(Integer id, EstadoPagamento estado, Pedido pedido) {
         super();
@@ -43,22 +45,6 @@ public abstract class Pagamento implements Serializable {
 
     public void setEstado(EstadoPagamento estado) {
         this.estado = (estado == null) ? null : estado.getCod();
-    }
-
-    public Pedido getPedido() {
-        return pedido;
-    }
-
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     @Override

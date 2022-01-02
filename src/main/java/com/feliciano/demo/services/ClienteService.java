@@ -121,7 +121,7 @@ public class ClienteService {
                     TipoCliente.toEnum(objDto.getTipo()), per.encode(objDto.getSenha()));
             Cidade cidade = new Cidade(objDto.getCidadeId(), null, null);
             Endereco end = new Endereco(null, objDto.getLogradouro(), objDto.getNumero(), objDto.getComplemento(),
-                    objDto.getBairro(), objDto.getCep(), cidade, cliente);
+                                objDto.getBairro(), objDto.getCep(), cliente, cidade);
             cliente.getEnderecos().add(end);
             cliente.getTelefones().add(objDto.getTelefone1());
             if (objDto.getTelefone2() != null) {

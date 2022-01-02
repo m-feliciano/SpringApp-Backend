@@ -1,6 +1,9 @@
 package com.feliciano.demo.resources.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,6 +12,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 public class Pedido implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,9 +40,6 @@ public class Pedido implements Serializable {
     @OneToMany(mappedBy = "id.pedido")
     private Set<ItemPedido> itens = new HashSet<>();
 
-    public Pedido() {
-    }
-
     public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoEntrega) {
         super();
         this.id = id;
@@ -46,71 +49,7 @@ public class Pedido implements Serializable {
     }
 
     public double getValorTotal() {
-        return itens.stream().map(p -> p.getSubtotal()).reduce(0.0, (total, acumulador) -> total + acumulador)
-                .doubleValue();
-    }
-
-    public Endereco getEnderecoEntrega() {
-        return enderecoEntrega;
-    }
-
-    public void setEnderecoEntrega(Endereco enderecoEntrega) {
-        this.enderecoEntrega = enderecoEntrega;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Date getInstante() {
-        return instante;
-    }
-
-    public void setInstante(Date instante) {
-        this.instante = instante;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if ((obj == null) || (getClass() != obj.getClass()))
-            return false;
-        Pedido other = (Pedido) obj;
-        return Objects.equals(id, other.id);
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Pagamento getPagamento() {
-        return pagamento;
-    }
-
-    public void setPagamento(Pagamento pagamento) {
-        this.pagamento = pagamento;
-    }
-
-    public Set<ItemPedido> getItens() {
-        return itens;
-    }
-
-    public void setItens(Set<ItemPedido> itens) {
-        this.itens = itens;
+        return itens.stream().map(ItemPedido::getSubtotal).reduce(0.0, Double::sum);
     }
 
     @Override
@@ -133,6 +72,21 @@ public class Pedido implements Serializable {
         builder.append("ValorTotal: ");
         builder.append(nf.format(getValorTotal()));
         return builder.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if ((obj == null) || (getClass() != obj.getClass()))
+            return false;
+        Pedido other = (Pedido) obj;
+        return Objects.equals(id, other.id);
     }
 
 

@@ -1,14 +1,23 @@
 package com.feliciano.demo.resources.domain;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 public class Categoria implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -22,52 +31,6 @@ public class Categoria implements Serializable {
     public Categoria(Integer id, String nome) {
         this.id = id;
         this.nome = nome;
-    }
-
-    public Categoria() {
-        super();
-    }
-
-    /**
-     * @return the id
-     */
-    public Integer getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the nome
-     */
-    public String getNome() {
-        return nome;
-    }
-
-    /**
-     * @param nome the nome to set
-     */
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    /**
-     * @return the produtos
-     */
-    public List<Produto> getProdutos() {
-        return produtos;
-    }
-
-    /**
-     * @param produtos the produtos to set
-     */
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
     }
 
     @Override
@@ -84,5 +47,4 @@ public class Categoria implements Serializable {
         Categoria other = (Categoria) obj;
         return Objects.equals(id, other.id) && Objects.equals(nome, other.nome);
     }
-
 }

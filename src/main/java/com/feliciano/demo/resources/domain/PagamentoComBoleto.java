@@ -3,6 +3,8 @@ package com.feliciano.demo.resources.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.feliciano.demo.resources.domain.enums.EstadoPagamento;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import java.util.Date;
@@ -14,9 +16,9 @@ public class PagamentoComBoleto extends Pagamento {
     private static final long serialVersionUID = 1L;
 
     @JsonFormat(pattern = "dd/MM/yy HH:mm")
-    private Date dataVencimento;
+    @Getter @Setter private Date dataVencimento;
     @JsonFormat(pattern = "dd/MM/yy HH:mm")
-    private Date dataPagamento;
+    @Getter @Setter private Date dataPagamento;
 
     public PagamentoComBoleto() {
         super();
@@ -28,21 +30,4 @@ public class PagamentoComBoleto extends Pagamento {
         this.setDataVencimento(dataVencimento);
         this.setDataPagamento(dataPagamento);
     }
-
-    public Date getDataVencimento() {
-        return dataVencimento;
-    }
-
-    public void setDataVencimento(Date dataVencimento) {
-        this.dataVencimento = dataVencimento;
-    }
-
-    public Date getDataPagamento() {
-        return dataPagamento;
-    }
-
-    public void setDataPagamento(Date dataPagamento) {
-        this.dataPagamento = dataPagamento;
-    }
-
 }
