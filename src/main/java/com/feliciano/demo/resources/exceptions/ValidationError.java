@@ -6,21 +6,21 @@ import java.util.List;
 
 public class ValidationError extends StandardError {
 
-    @Serial
-    private static final long serialVersionUID = 1L;
+	@Serial
+	private static final long serialVersionUID = 1L;
 
-    private final List<FieldMessage> errors = new ArrayList<>();
+	private final List<FieldMessage> errors = new ArrayList<>();
 
-    public ValidationError(Long timestamp, Integer status, String error, String message, String path) {
-        super(timestamp,status,error,message,path);
-    }
+	public ValidationError(Long timestamp, Integer status, String error, String message, String path) {
+		super(timestamp, status, error, message, path);
+	}
 
-    public List<FieldMessage> getErrors() {
-        return errors;
-    }
+	public List<FieldMessage> getErrors() {
+		return errors;
+	}
 
-    public void addError(String fieldName, String message) {
-        errors.add(new FieldMessage(fieldName, message));
-    }
+	public void addError(String fieldName, String message) {
+		errors.add(new FieldMessage(fieldName, message));
+	}
 
 }

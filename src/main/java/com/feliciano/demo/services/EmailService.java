@@ -1,21 +1,22 @@
 package com.feliciano.demo.services;
 
-import com.feliciano.demo.resources.domain.Cliente;
-import com.feliciano.demo.resources.domain.Pedido;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.mail.SimpleMailMessage;
 
-import javax.mail.internet.MimeMessage;
+import com.feliciano.demo.resources.domain.Client;
+import com.feliciano.demo.resources.domain.Order;
 
 public interface EmailService {
 
-    void sendOrderConfirmationEmail(Pedido obj);
+	void sendOrderConfirmationEmail(Order obj);
 
-    void sendEmail(SimpleMailMessage msg);
+	void sendEmail(SimpleMailMessage msg);
 
-    void sendOrderConfirmationHtmlEmail(Pedido obj);
+	void sendOrderConfirmationHtmlEmail(Order obj);
 
-    void sendHtmlEmail(MimeMessage msg);
+	void sendHtmlEmail(MimeMessage msg);
 
-    void sendNewPasswordEmail(Cliente cliente, String newPass);
+	void sendNewPasswordEmail(Client client, String newPass);
 
 }

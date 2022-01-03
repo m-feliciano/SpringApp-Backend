@@ -1,22 +1,20 @@
 package com.feliciano.demo.dto;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class EmailDTO implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @NotEmpty(message = "Preenchiento obrigatório")
-    @Email(message = "E-mail inválido")
-    private String email;
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	@NotEmpty(message = "Mandatory completion")
+	@Email(message = "inválid email")
+	private String email;
 }
