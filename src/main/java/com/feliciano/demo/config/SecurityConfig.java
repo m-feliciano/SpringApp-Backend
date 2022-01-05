@@ -1,7 +1,8 @@
 package com.feliciano.demo.config;
 
-import java.util.Arrays;
-
+import com.feliciano.demo.security.JWTAuthenticationFilter;
+import com.feliciano.demo.security.JWTAuthorizationFilter;
+import com.feliciano.demo.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,17 +19,15 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.feliciano.demo.security.JWTAuthenticationFilter;
-import com.feliciano.demo.security.JWTAuthorizationFilter;
-import com.feliciano.demo.security.JWTUtil;
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
 //@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private static final String[] PUBLIC_MATCHERS = { "/h2-console/**" };
-	private static final String[] PUBLIC_MATCHERS_GET = { "/products/**", "/categories/**", "/states/**" };
-	private static final String[] PUBLIC_MATCHERS_POST = { "/clients", "/auth/forgot/**" };
+	private static final String[] PUBLIC_MATCHERS_GET = { "/api/v1/products/**", "/api/v1/categories/**", "/api/v1/states/**" };
+	private static final String[] PUBLIC_MATCHERS_POST = { "/api/v1/clients/**", "/api/v1/auth/forgot/**" };
 	@Autowired
 	private Environment env;
 	@Autowired

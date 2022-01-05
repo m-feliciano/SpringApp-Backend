@@ -1,8 +1,10 @@
 package com.feliciano.demo.resources;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-
+import com.feliciano.demo.dto.EmailDTO;
+import com.feliciano.demo.security.JWTUtil;
+import com.feliciano.demo.security.SpringSecurityUser;
+import com.feliciano.demo.services.AuthService;
+import com.feliciano.demo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,15 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.feliciano.demo.dto.EmailDTO;
-import com.feliciano.demo.security.JWTUtil;
-import com.feliciano.demo.security.SpringSecurityUser;
-import com.feliciano.demo.services.AuthService;
-import com.feliciano.demo.services.UserService;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/api/v1/auth")
-public class AuthResourse {
+public class AuthResource {
 
 	@Autowired
 	private JWTUtil jwtUtil;
