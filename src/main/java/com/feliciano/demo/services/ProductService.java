@@ -1,20 +1,18 @@
 package com.feliciano.demo.services;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-
+import com.feliciano.demo.repositories.CategoryRepository;
+import com.feliciano.demo.repositories.ProductRepository;
+import com.feliciano.demo.resources.domain.Category;
+import com.feliciano.demo.resources.domain.Product;
+import com.feliciano.demo.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.feliciano.demo.repositories.CategoryRepository;
-import com.feliciano.demo.repositories.ProductRepository;
-import com.feliciano.demo.resources.domain.Category;
-import com.feliciano.demo.resources.domain.Product;
-import com.feliciano.demo.services.exceptions.ObjectNotFoundException;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -34,7 +32,7 @@ public class ProductService {
 			String direction) {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		List<Category> categories = catRepo.findAllById(ids);
-		return repo.findDistinctByNameContainingAndCategoriesIn(name, Collections.singleton(categories), pageRequest);
+		return repo.findDistinctByNameContainingIgnoreCaseAndCategoriesIn(name, categories, pageRequest);
 
 	}
 }
