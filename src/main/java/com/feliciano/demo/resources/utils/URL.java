@@ -8,13 +8,12 @@ import java.util.stream.Collectors;
 
 public class URL {
 
-	public static String decodeParam(String s) {
-		return URLDecoder.decode(s, StandardCharsets.UTF_8);
-	}
+    public static String decodeParam(String s) {
+        return URLDecoder.decode(s, StandardCharsets.UTF_8);
+    }
 
-	public static List<Integer> decodeInList(String s) {
-
-		return Arrays.stream(s.split(",")).map(Integer::parseInt).collect(Collectors.toList());
-	}
+    public static List<Integer> decodeInList(String s) {
+        return Arrays.stream(s.split(",")).map(Integer::parseInt).collect(Collectors.toList());
+    }
 
 }
