@@ -18,19 +18,19 @@ public class BoletoPayment extends Payment {
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	@Getter
 	@Setter
-	private Date dataVencimento;
+	private Date dueDate;
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	@Getter
 	@Setter
-	private Date dataPagamento;
+	private Date paymentDate;
 
 	public BoletoPayment() {
 		super();
 	}
 
-	public BoletoPayment(Integer id, PaymentStatus state, Order order, Date dataVencimento, Date dataPagamento) {
+	public BoletoPayment(Integer id, PaymentStatus state, Order order, Date dueDate, Date paymentDate) {
 		super(id, state, order);
-		this.setDataVencimento(dataVencimento);
-		this.setDataPagamento(dataPagamento);
+		this.setDueDate(dueDate);
+		this.setPaymentDate(paymentDate);
 	}
 }

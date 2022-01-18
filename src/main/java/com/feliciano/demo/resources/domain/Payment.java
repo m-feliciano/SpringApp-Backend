@@ -23,7 +23,7 @@ import lombok.Setter;
 @Entity
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@type")
 @Table(name = "tb_payment")
 public abstract class Payment implements Serializable {
 
@@ -51,7 +51,7 @@ public abstract class Payment implements Serializable {
 		this.setOrder(order);
 	}
 
-	public PaymentStatus getEstado() {
+	public PaymentStatus getStatus() {
 		return PaymentStatus.toEnum(status);
 	}
 

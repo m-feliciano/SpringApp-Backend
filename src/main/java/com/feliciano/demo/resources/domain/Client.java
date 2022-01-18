@@ -47,7 +47,7 @@ public class Client implements Serializable {
 	private String name;
 	private String email;
 	private String cpfOrCnpj;
-	private Integer tipo;
+	private Integer type;
 	@JsonIgnore
 	private String password;
 
@@ -66,30 +66,30 @@ public class Client implements Serializable {
 		addPerfil(Perfil.CLIENT);
 	}
 
-	public Client(Integer id, String name, String email, String cpfOrCnpj, ClientType tipo, String senha) {
+	public Client(Integer id, String name, String email, String cpfOrCnpj, ClientType type, String senha) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.cpfOrCnpj = cpfOrCnpj;
 		this.password = senha;
-		this.tipo = (tipo == null) ? null : tipo.getCod();
+		this.type = (type == null) ? null : type.getCod();
 		addPerfil(Perfil.CLIENT);
 	}
 
 	/**
-	 * @return the tipoCliente
+	 * @return the typeCliente
 	 * @throws IllegalAccessException
 	 */
-	public ClientType getTipo() throws IllegalAccessException {
-		return ClientType.toEnum(tipo);
+	public ClientType getType() throws IllegalAccessException {
+		return ClientType.toEnum(type);
 	}
 
 	/**
-	 * @param tipo the tipoCliente to set
+	 * @param type the typeCliente to set
 	 */
-	public void setTipo(ClientType tipo) {
-		this.tipo = tipo.getCod();
+	public void setType(ClientType type) {
+		this.type = type.getCod();
 	}
 
 	public Set<Perfil> getPerfils() {

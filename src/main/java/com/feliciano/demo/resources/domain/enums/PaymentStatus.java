@@ -9,11 +9,11 @@ public enum PaymentStatus {
 	@Getter
 	private final int cod;
 	@Getter
-	private final String descricao;
+	private final String description;
 
-	PaymentStatus(int cod, String descricao) {
+	PaymentStatus(int cod, String description) {
 		this.cod = cod;
-		this.descricao = descricao;
+		this.description = description;
 	}
 
 	public static PaymentStatus toEnum(Integer cod) {

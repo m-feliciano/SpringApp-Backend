@@ -1,11 +1,10 @@
 package com.feliciano.demo.services;
 
-import javax.mail.internet.MimeMessage;
-
-import org.springframework.mail.SimpleMailMessage;
-
 import com.feliciano.demo.resources.domain.Client;
 import com.feliciano.demo.resources.domain.Order;
+import org.springframework.mail.SimpleMailMessage;
+
+import javax.mail.internet.MimeMessage;
 
 public interface EmailService {
 

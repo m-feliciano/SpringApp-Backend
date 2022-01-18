@@ -28,8 +28,8 @@ public class OrderResource {
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> insert(@Valid @RequestBody Order obj) { // @RequestBody converts JSON to object body
         obj = service.insert(obj);
-        ServletUriComponentsBuilder.fromCurrentRequest();
-        URI uri = UriComponentsBuilder.fromPath("/{id}").buildAndExpand(obj.getItens()).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 

@@ -20,10 +20,10 @@ public class CardPayment extends Payment {
 
 	@Serial
 	private static final long serialVersionUID = 1L;
-	private Integer numeroDeParcelas;
+	private Integer installmentsNumber;
 
 	public CardPayment(Integer id, PaymentStatus status, Order order, Integer numeroDeParcelas) {
 		super(id, status, order);
-		this.setNumeroDeParcelas(numeroDeParcelas);
+		this.setInstallmentsNumber(numeroDeParcelas);
 	}
 }

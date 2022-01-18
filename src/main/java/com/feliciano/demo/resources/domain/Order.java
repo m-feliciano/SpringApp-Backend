@@ -63,7 +63,7 @@ public class Order implements Serializable {
 		this.setEnderecoEntrega(addr);
 	}
 
-	public double getValorTotal() {
+	public double getTotalValue() {
 		return itens.stream().map(OrderItem::getSubtotal).reduce(0.0, Double::sum);
 	}
 
@@ -79,13 +79,13 @@ public class Order implements Serializable {
 		builder.append("\nClient: ");
 		builder.append(getClient().getName());
 		builder.append("\nPayment Status: ");
-		builder.append(getPayment().getEstado().getDescricao());
+		builder.append(getPayment().getStatus().getDescription());
 		builder.append("\nDetails:\n");
 		for (OrderItem ip : getItens()) {
 			builder.append(ip.toString());
 		}
 		builder.append("TotalValue: ");
-		builder.append(nf.format(getValorTotal()));
+		builder.append(nf.format(getTotalValue()));
 		return builder.toString();
 	}
 

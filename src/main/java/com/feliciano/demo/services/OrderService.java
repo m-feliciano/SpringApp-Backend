@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import com.feliciano.demo.resources.domain.enums.PaymentStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,7 +19,6 @@ import com.feliciano.demo.resources.domain.BoletoPayment;
 import com.feliciano.demo.resources.domain.Client;
 import com.feliciano.demo.resources.domain.Order;
 import com.feliciano.demo.resources.domain.OrderItem;
-import com.feliciano.demo.resources.domain.enums.PaymentStatus;
 import com.feliciano.demo.security.SpringSecurityUser;
 import com.feliciano.demo.services.exceptions.AuthorizationException;
 import com.feliciano.demo.services.exceptions.ObjectNotFoundException;
