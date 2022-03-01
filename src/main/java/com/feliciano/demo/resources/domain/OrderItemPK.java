@@ -1,6 +1,5 @@
 package com.feliciano.demo.resources.domain;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -16,7 +15,6 @@ import lombok.Setter;
 @Embeddable // means subtipo
 public class OrderItemPK implements Serializable {
 
-	@Serial
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne

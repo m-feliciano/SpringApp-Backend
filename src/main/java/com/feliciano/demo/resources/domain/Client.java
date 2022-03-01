@@ -1,6 +1,5 @@
 package com.feliciano.demo.resources.domain;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -36,7 +35,7 @@ import lombok.Setter;
 @Table(name = "tb_client")
 public class Client implements Serializable {
 
-	@Serial
+
 	private static final long serialVersionUID = 1L;
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "PERFIS")

@@ -1,25 +1,27 @@
 package com.feliciano.demo.security;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.feliciano.demo.dto.CredentialsDTO;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.feliciano.demo.dto.CredentialsDTO;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-	private final JWTUtil jwtUtil;
-	private final AuthenticationManager authenticationManager;
+	private JWTUtil jwtUtil;
+	private AuthenticationManager authenticationManager;
 
 	public JWTAuthenticationFilter(JWTUtil jwtUtil, AuthenticationManager authenticationManager) {
 		super();
@@ -48,7 +50,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
 		String username = ((SpringSecurityUser) auth.getPrincipal()).getUsername();
 		String token = jwtUtil.generateToken(username);
-		res.addHeader("Authorization", "Bearer " + token);
+		res.addHeader("Authorization", token);
 		res.addHeader("access-control-expose-headers", "Authorization");
 	}
 

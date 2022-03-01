@@ -1,6 +1,5 @@
 package com.feliciano.demo.resources.domain;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -11,7 +10,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,7 +19,6 @@ import lombok.Setter;
 @Table(name = "order_item")
 public class OrderItem implements Serializable {
 
-	@Serial
 	private static final long serialVersionUID = 1L;
 
 	@JsonIgnore // deny serialization from here

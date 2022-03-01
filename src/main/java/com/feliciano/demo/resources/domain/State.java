@@ -1,6 +1,5 @@
 package com.feliciano.demo.resources.domain;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +25,6 @@ import lombok.Setter;
 @Table(name = "tb_state")
 public class State implements Serializable {
 
-	@Serial
 	private static final long serialVersionUID = 1L;
 
 	@Id
